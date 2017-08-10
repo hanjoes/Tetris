@@ -1,11 +1,3 @@
-//
-//  GameViewController.swift
-//  Tetris
-//
-//  Created by Hanzhou Shi on 8/7/17.
-//  Copyright © 2017 Hanzhou Shi. All rights reserved.
-//
-
 import UIKit
 import SpriteKit
 import GameplayKit
