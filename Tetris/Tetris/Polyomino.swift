@@ -7,6 +7,9 @@ import UIKit
 /// [Definition of Polyomino](https://en.wikipedia.org/wiki/Polyomino)
 struct Polyomino {
     
+    /// Constant for a `Polyomino` that contains no cell.
+    static let nomino = Polyomino(fromPoints: [CGPoint]())
+    
     /// Points defines this polyomino.
     /// The points represents the bottom-left corner of
     /// the cells.
@@ -48,7 +51,14 @@ struct Polyomino {
     ///
     /// - Returns: a new `Polyomino` normalized
     func normalized() -> Polyomino {
-        return self
+        guard !points.isEmpty else {
+            return Polyomino.nomino
+        }
+        
+        let origin = points.first!
+        let translation = origin.translation(to: CGPoint.zero)
+        let normalizedPoints = points.map { $0.translate(by: translation) }
+        return Polyomino(fromPoints: normalizedPoints)
     }
     
     /// Rotates a polyomino clockwise by 90 degrees.

@@ -10,6 +10,5 @@ class SKPolyomino: SKSpriteNode {
     
     /// The prototype is a `Polyomino` that can be used
     /// as a blueprint to create the `SKPolyomino`.
-    let prototype: Polyomino! = nil
-    
+    var prototype: Polyomino!
 }
