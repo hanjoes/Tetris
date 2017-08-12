@@ -4,6 +4,8 @@ import UIKit
 /// are used to indicate the bottom-left corner of all the cells
 /// in a real polyomino.
 ///
+/// - Note: Assuming the scale of each cell is 1 here.
+///
 /// [Definition of Polyomino](https://en.wikipedia.org/wiki/Polyomino)
 struct Polyomino {
     
@@ -65,6 +67,10 @@ struct Polyomino {
     ///
     /// - Returns: The clockwise-rotated polyomino.
     func clockwiseRotated() -> Polyomino {
+        // 1. translate to make pivot origin
+        // 2. shift all points to right by 1
+        // 3. "rotate" the vector
+        // 4. translate back
         return self
     }
 }
