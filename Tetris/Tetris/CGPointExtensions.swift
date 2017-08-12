@@ -26,4 +26,24 @@ extension CGPoint {
     func translate(by translation: CGPoint) -> CGPoint {
         return CGPoint(x: x + translation.x, y: y + translation.y)
     }
+    
+    /// Clockwise rotate a point around a pivot.
+    ///
+    /// - Parameter pivot: the pivot to rotate around
+    /// - Returns: the clockwise rotated point
+    func clockwiseRotated(around pivot: CGPoint) -> CGPoint {
+        let translatedPoint = translation(from: pivot)
+        let rotatedPoint = CGPoint(x: translatedPoint.y, y: -translatedPoint.x)
+        return rotatedPoint.translate(by: pivot)
+    }
+    
+    /// Counter-clockwise rotate a point around a pivot.
+    ///
+    /// - Parameter pivot: the pivot to rotate around
+    /// - Returns: the counter-clockwise rotated point
+    func counterClockwiseRotated(around pivot: CGPoint) -> CGPoint {
+        let translatedPoint = translation(from: pivot)
+        let rotatedPoint = CGPoint(x: -translatedPoint.y, y: translatedPoint.x)
+        return rotatedPoint.translate(by: pivot)
+    }
 }

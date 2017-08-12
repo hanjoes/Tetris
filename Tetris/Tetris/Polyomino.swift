@@ -65,13 +65,22 @@ struct Polyomino {
     
     /// Rotates a polyomino clockwise by 90 degrees.
     ///
-    /// - Returns: The clockwise-rotated polyomino.
-    func clockwiseRotated() -> Polyomino {
-        // 1. translate to make pivot origin
-        // 2. shift all points to right by 1
-        // 3. "rotate" the vector
-        // 4. translate back
-        return self
+    /// - Parameter pivot: the pivot to rotate around
+    /// - Returns: the clockwise rotated polyomino
+    func clockwiseRotated(around pivot: CGPoint) -> Polyomino {
+        return Polyomino(fromPoints: points.map {
+            $0.translate(by: CGPoint(x: 1, y: 0))
+            }.map { $0.clockwiseRotated(around: pivot) })
+    }
+    
+    /// Rotates a polyomino counter-clockwise by 90 degrees.
+    ///
+    /// - Parameter pivot: the pivot to rotate around
+    /// - Returns: the counter-clockwise rotated polyomino
+    func counterClockwiseRotated(around pivot: CGPoint) -> Polyomino {
+        return Polyomino(fromPoints: points.map {
+            $0.translate(by: CGPoint(x: 0, y: 1))
+            }.map { $0.counterClockwiseRotated(around: pivot) })
     }
 }
 
