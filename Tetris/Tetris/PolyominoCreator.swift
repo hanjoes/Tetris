@@ -11,9 +11,9 @@ struct PolyominoCreator {
     ///
     /// - Parameter cellNum: number of cells in the generated polyomino
     /// - Returns: a polyomino
-    func createPolyominos(withCellNum cellNum: Int) -> [Polyomino] {
-        guard cellNum > 0 else {
-            return [Polyomino]()
+    static func createOneSidedPolyominos(withCellNum cellNum: Int) -> [Polyomino] {
+        if cellNum == 0 {
+            return [Polyomino.nomino]
         }
         
         if cellNum == 1 {
@@ -35,19 +35,49 @@ struct PolyominoCreator {
         
         var polyominoes = [domino]
         for _ in 2..<cellNum {
-            polyominoes = polyominoes.flatMap { addCellTo(polyomino: $0) }
+            polyominoes = polyominoes.reduce([Polyomino]()) {
+                current, polyomino in
+                var nextResult = current
+                let candidates = addCell(to: polyomino, in: current)
+                for candidate in candidates {
+                    if !nextResult.contains(candidate) {
+                        nextResult.append(candidate)
+                    }
+                }
+                return nextResult
+            }
         }
         return polyominoes
     }
     
-    
     /// Add one cell to a polyomino and get all unique polyomionoes.
     ///
-    /// - Parameter polyomino: the initial polyomino
-    /// - Returns: all possible de-duped polyominoes
-    private func addCellTo(polyomino: Polyomino) -> [Polyomino] {
+    /// - Parameters:
+    ///   - polyomino: polyomino to add cell to
+    ///   - current: current list of polyominoes derived from the target polyomino
+    /// - Returns: a list of polyominoes
+    static private func addCell(to polyomino: Polyomino, in current: [Polyomino]) -> [Polyomino] {
+//        print("number of  points: \(polyomino.growthPoints.count) on \(polyomino)")
         var uniquePolyominoes = [Polyomino]()
-        return [Polyomino(fromPoints: [CGPoint]())]
+        for growthPoint in polyomino.growthPoints {
+            let candidate = Polyomino(fromPoints: polyomino.points + [growthPoint])
+            var preparedCandidate = candidate
+            var qualified = true
+            for _ in 0..<4 {
+                preparedCandidate = preparedCandidate
+                    .clockwiseRotated(around: candidate.points.first!)
+                    .normalized()
+                if uniquePolyominoes.contains(preparedCandidate) || current.contains(preparedCandidate) {
+                    qualified = false
+                    break
+                }
+            }
+            if qualified {
+//                print("Adding \(candidate.normalized()) to unique set: \(uniquePolyominoes)")
+                uniquePolyominoes.append(candidate.normalized())
+            }
+        }
+        return uniquePolyominoes
     }
     
 }

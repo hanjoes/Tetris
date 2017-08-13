@@ -18,6 +18,22 @@ struct Polyomino {
     /// - Note: The points are always sorted. see `sorter` for detail.
     let points: [CGPoint]
     
+    /// A list of `CGPoint`s we can "grow" the polyomino by adding cells using them
+    /// as bottom-left corner.
+    var growthPoints: [CGPoint] {
+        return points.reduce([CGPoint]()) {
+            current, point in
+            let neighbors = point.adjacentPoints(with: 1.0)
+            var nextResult = current
+            for neighbor in neighbors {
+                if !nextResult.contains(neighbor) && !self.points.contains(neighbor) {
+                    nextResult.append(neighbor)
+                }
+            }
+            return nextResult
+        }
+    }
+    
     /// Sorts two points. A point to the left of another point appears
     /// before. A point above another point appears before.
     ///
@@ -68,9 +84,9 @@ struct Polyomino {
     /// - Parameter pivot: the pivot to rotate around
     /// - Returns: the clockwise rotated polyomino
     func clockwiseRotated(around pivot: CGPoint) -> Polyomino {
-        return Polyomino(fromPoints: points.map {
-            $0.translate(by: CGPoint(x: 1, y: 0))
-            }.map { $0.clockwiseRotated(around: pivot) })
+        return Polyomino(fromPoints: points
+            .map { $0.translate(by: CGPoint(x: 1, y: 0)) }
+            .map { $0.clockwiseRotated(around: pivot) })
     }
     
     /// Rotates a polyomino counter-clockwise by 90 degrees.
@@ -78,10 +94,11 @@ struct Polyomino {
     /// - Parameter pivot: the pivot to rotate around
     /// - Returns: the counter-clockwise rotated polyomino
     func counterClockwiseRotated(around pivot: CGPoint) -> Polyomino {
-        return Polyomino(fromPoints: points.map {
-            $0.translate(by: CGPoint(x: 0, y: 1))
-            }.map { $0.counterClockwiseRotated(around: pivot) })
+        return Polyomino(fromPoints: points
+            .map { $0.translate(by: CGPoint(x: 0, y: 1)) }
+            .map { $0.counterClockwiseRotated(around: pivot) })
     }
+ 
 }
 
 

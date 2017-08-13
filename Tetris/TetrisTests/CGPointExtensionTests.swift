@@ -67,4 +67,15 @@ class CGPointExtensionTests: XCTestCase {
         XCTAssertEqual(CGPoint(x: 5, y: 2), actual)
     }
     
+    // MARK: adjacent points
+    
+    func testGeneratingNeighbors() {
+        let p = CGPoint(x: 1, y: 2)
+        let actual = p.adjacentPoints(with: 1)
+        XCTAssertTrue(actual.contains(CGPoint(x: 2, y: 2)))
+        XCTAssertTrue(actual.contains(CGPoint(x: 0, y: 2)))
+        XCTAssertTrue(actual.contains(CGPoint(x: 1, y: 1)))
+        XCTAssertTrue(actual.contains(CGPoint(x: 1, y: 3)))
+    }
+    
 }

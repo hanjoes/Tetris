@@ -46,4 +46,17 @@ extension CGPoint {
         let rotatedPoint = CGPoint(x: -translatedPoint.y, y: translatedPoint.x)
         return rotatedPoint.translate(by: pivot)
     }
+    
+    /// Generates all "neighbor" points vertically or horizontally.
+    ///
+    /// - Parameter distance: distance to this point
+    /// - Returns: a list of "neighbor" points
+    func adjacentPoints(with distance: CGFloat) -> [CGPoint] {
+        var neighbors = [CGPoint]()
+        neighbors.append(self.translate(by: CGPoint(x: distance, y: 0)))
+        neighbors.append(self.translate(by: CGPoint(x: 0, y: distance)))
+        neighbors.append(self.translate(by: CGPoint(x: -distance, y: 0)))
+        neighbors.append(self.translate(by: CGPoint(x: 0, y: -distance)))
+        return neighbors
+    }
 }
