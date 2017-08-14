@@ -3,6 +3,34 @@ import UIKit
 /// Creates polyominoes.
 struct PolyominoCreator {
     
+    /// Number of cells in the `Polyomino` created by this creator.
+    let cellNum: Int
+    
+    /// Possible polyominoes that can be created from this creator.
+    var possiblePolyominoes = [Polyomino]()
+    
+    /// Initializes a creator that can create polyominoes of specific
+    /// complexity.
+    ///
+    /// - Parameter num: number of cells in the polyominoes created
+    init(forCellNum num: Int) {
+        self.cellNum = num
+        initializePossiblePolyominoes()
+    }
+    
+    /// Randomly get a `Polyomino` from the possible polyominoes
+    /// created by this creator.
+    ///
+    /// - Returns: a randomly chosen `Polyomino`
+    var randomPolyomino: Polyomino {
+        let index = Int(arc4random() % UInt32(possiblePolyominoes.count))
+        return possiblePolyominoes[index]
+    }
+    
+}
+
+private extension PolyominoCreator {
+    
     /// Creates all possible Polyominos for the given cell num.
     ///
     /// This method creates polyomino inductively, meaning we first create
@@ -11,13 +39,13 @@ struct PolyominoCreator {
     ///
     /// - Parameter cellNum: number of cells in the generated polyomino
     /// - Returns: a polyomino
-    static func createOneSidedPolyominos(withCellNum cellNum: Int) -> [Polyomino] {
+    mutating func initializePossiblePolyominoes() {
         if cellNum == 0 {
-            return [Polyomino.nomino]
+            possiblePolyominoes = [Polyomino.nomino]
         }
         
         if cellNum == 1 {
-            return [Polyomino(fromPoints: [CGPoint(x: 0, y: 0)])]
+            possiblePolyominoes = [Polyomino(fromPoints: [CGPoint(x: 0, y: 0)])]
         }
         
         //
@@ -47,7 +75,7 @@ struct PolyominoCreator {
                 return nextResult
             }
         }
-        return polyominoes
+        possiblePolyominoes = polyominoes
     }
     
     /// Add one cell to a polyomino and get all unique polyomionoes.
@@ -56,8 +84,8 @@ struct PolyominoCreator {
     ///   - polyomino: polyomino to add cell to
     ///   - current: current list of polyominoes derived from the target polyomino
     /// - Returns: a list of polyominoes
-    static private func addCell(to polyomino: Polyomino, in current: [Polyomino]) -> [Polyomino] {
-//        print("number of  points: \(polyomino.growthPoints.count) on \(polyomino)")
+    mutating func addCell(to polyomino: Polyomino, in current: [Polyomino]) -> [Polyomino] {
+        //        print("number of  points: \(polyomino.growthPoints.count) on \(polyomino)")
         var uniquePolyominoes = [Polyomino]()
         for growthPoint in polyomino.growthPoints {
             let candidate = Polyomino(fromPoints: polyomino.points + [growthPoint])
@@ -73,11 +101,10 @@ struct PolyominoCreator {
                 }
             }
             if qualified {
-//                print("Adding \(candidate.normalized()) to unique set: \(uniquePolyominoes)")
+                //                print("Adding \(candidate.normalized()) to unique set: \(uniquePolyominoes)")
                 uniquePolyominoes.append(candidate.normalized())
             }
         }
         return uniquePolyominoes
     }
-    
 }

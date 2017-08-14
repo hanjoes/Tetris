@@ -13,6 +13,7 @@
 		DB4558EC1F3F805C002BD1AA /* CGPointExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */; };
 		DB4558EE1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */; };
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
+		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
 		DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C821F397BB600DD4694 /* AppDelegate.swift */; };
 		DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C841F397BB600DD4694 /* GameScene.sks */; };
 		DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C861F397BB600DD4694 /* Actions.sks */; };
@@ -49,6 +50,7 @@
 		DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionTests.swift; sourceTree = "<group>"; };
 		DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreatorTests.swift; sourceTree = "<group>"; };
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
+		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		DB8B6C7F1F397BB600DD4694 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8B6C821F397BB600DD4694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB8B6C841F397BB600DD4694 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */,
 				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
 				DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */,
+				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
 				DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */,
+				DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */,
 				DB04E1BB1F3D663F00B60083 /* SKPolyomino.swift in Sources */,
 				DB3408E91F3ADDD5000A1F5F /* PolyominoCreator.swift in Sources */,
 			);
