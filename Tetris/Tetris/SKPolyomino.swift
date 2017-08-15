@@ -24,8 +24,8 @@ struct SKPolyomino {
             return spriteNodes.first?.position ?? CGPoint.zero
         }
         set {
+            let translation = position.translation(to: newValue)
             for child in spriteNodes {
-                let translation = position.translation(from: newValue)
                 child.position = child.position.translate(by: translation)
             }
         }
@@ -42,6 +42,7 @@ struct SKPolyomino {
         spriteNodes = self.prototype.points.map {
             let skNode = SKSpriteNode(texture: nil, color: .blue, size: CGSize(width: scale, height: scale))
             skNode.position = CGPoint(x: $0.x * scale, y: $0.y * scale)
+            skNode.anchorPoint = CGPoint(x: 0, y: 0)
             return skNode
         }
     }
@@ -70,6 +71,13 @@ struct SKPolyomino {
                 child.removeFromParent()
                 parent.addChild(child)
             }
+        }
+    }
+    
+    /// Drops this polyomino by one cell.
+    func drop() {
+        for child in spriteNodes {
+            child.position = child.position.translate(by: CGPoint(x: 0, y: -scale))
         }
     }
 

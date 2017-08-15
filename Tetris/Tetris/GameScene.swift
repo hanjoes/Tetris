@@ -5,6 +5,19 @@ import GameplayKit
 // TODO: - Switch to GameplayKit
 class GameScene: SKScene {
     
+    /// The arena where we actually play the game.
+    var arena: SKNode {
+        return childNode(withName: GameConstants.TetrisArenaKey)!
+    }
+    
+    /// The area where we spawn polyominoes.
+    var spawnArea: SKNode {
+        return childNode(withName: GameConstants.SpawnAreaKey)!
+    }
+    
+    /// Last time in Double the polyomino in the arena dropped.
+    var lastDropTime: Double = 0
+    
     /// There will be a preparing polyomino anytime when the game is in progress.
     var preparingPolyomino: SKPolyomino! {
         didSet {
@@ -17,8 +30,8 @@ class GameScene: SKScene {
     /// Similar to `preparingPolyomino` there will always be one dropping.
     var droppingPolyomino: SKPolyomino! {
         didSet {
-            let arena = childNode(withName: GameConstants.TetrisArenaKey)
             droppingPolyomino.move(to: arena)
+            droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
         }
     }
     
@@ -27,7 +40,6 @@ class GameScene: SKScene {
     
     /// Scale of the cells used in the polyominoes in the arena.
     var scale: CGFloat {
-        let arena = childNode(withName: GameConstants.TetrisArenaKey)!
         return arena.frame.width / GameConstants.HorizontalCellNum
     }
     
@@ -37,7 +49,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         spawnPreparingPolyomino()
-        updateDroppingPolyomino()
+        
+        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
+            updateDroppingPolyomino()
+        }
     }
 
     
@@ -81,5 +96,7 @@ private extension GameScene {
             droppingPolyomino = preparingPolyomino
             preparingPolyomino = nil
         }
+        
+        droppingPolyomino.drop()
     }
 }
