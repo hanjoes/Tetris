@@ -15,6 +15,55 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.SpawnAreaKey)!
     }
     
+    /// Left button.
+    var leftButton: SKNode {
+        return childNode(withName: GameConstants.LeftButtonKey)!
+    }
+    
+    var leftButtonTouches = Set<UITouch>() {
+        didSet {
+            if !leftButtonTouches.isEmpty {
+                print("Left Added")
+            }
+            else {
+                print("Left empty")
+            }
+        }
+    }
+    
+    /// Right button.
+    var rightButton: SKNode {
+        return childNode(withName: GameConstants.RightButtonKey)!
+    }
+    
+    var rightButtonTouches = Set<UITouch>() {
+        didSet {
+            if !rightButtonTouches.isEmpty {
+                print("Right Added")
+            }
+            else {
+                print("Right empty")
+            }
+        }
+    }
+    
+    
+    /// Down button.
+    var downButton: SKNode {
+        return childNode(withName: GameConstants.DownButtonKey)!
+    }
+    
+    var downButtonTouches = Set<UITouch>() {
+        didSet {
+            if !downButtonTouches.isEmpty {
+                print("Down Added")
+            }
+            else {
+                print("Down empty")
+            }
+        }
+    }
+    
     /// Last time in Double the polyomino in the arena dropped.
     var lastDropTime: Double = 0
     
@@ -49,20 +98,41 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         spawnPreparingPolyomino()
-        
-        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
-            updateDroppingPolyomino()
-        }
+        updateDroppingPolyomino(currentTime)
     }
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let touchPoint = touch.location(in: self)
+            if leftButton.contains(touchPoint) {
+                leftButtonTouches.insert(touch)
+            }
+            else if rightButton.contains(touchPoint) {
+                rightButtonTouches.insert(touch)
+            }
+            else if downButton.contains(touchPoint) {
+                downButtonTouches.insert(touch)
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            if leftButtonTouches.contains(touch) {
+                _ = leftButtonTouches.remove(touch)
+            }
+            if rightButtonTouches.contains(touch) {
+                _ = rightButtonTouches.remove(touch)
+            }
+            if downButtonTouches.contains(touch) {
+                _ = downButtonTouches.remove(touch)
+            }
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -91,12 +161,17 @@ private extension GameScene {
     /// Update the dropping polyomino, this method will ensure we have a
     /// polyomino in the arena and preparing polyomino will be updated after
     /// we used the polyomino in spawning area.
-    func updateDroppingPolyomino() {
+    /// - Parameter currentTime: time when update is called
+    func updateDroppingPolyomino(_ currentTime: TimeInterval) {
         if droppingPolyomino == nil {
             droppingPolyomino = preparingPolyomino
             preparingPolyomino = nil
         }
         
-        droppingPolyomino.drop()
+        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
+            lastDropTime = currentTime
+            droppingPolyomino.drop()
+        }
     }
+
 }

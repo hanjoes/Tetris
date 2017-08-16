@@ -8,6 +8,17 @@ import SpriteKit
 /// and scale in our game scene.
 struct SKPolyomino {
     
+    /// Horizontal movement direction of this polyomino.
+    ///
+    /// - left: moving left
+    /// - right: moving right
+    /// - none: no horizontal movement
+    enum HorizontalDirection {
+        case left
+        case right
+        case none
+    }
+    
     /// The prototype is a `Polyomino` that can be used
     /// as a blueprint to create the `SKPolyomino`.
     var prototype: Polyomino
@@ -30,6 +41,9 @@ struct SKPolyomino {
             }
         }
     }
+    
+    /// Horizontal movement direction.
+    var direction: HorizontalDirection = .none
     
     /// Initializer from a prototype and the scale.
     ///
@@ -81,4 +95,17 @@ struct SKPolyomino {
         }
     }
 
+    /// Move left by one cell.
+    func moveLeft() {
+        for child in spriteNodes {
+            child.position = child.position.translate(by: CGPoint(x: -scale, y: 0))
+        }
+    }
+    
+    /// Move right by one cell.
+    func moveRight() {
+        for child in spriteNodes {
+            child.position = child.position.translate(by: CGPoint(x: scale, y: 0))
+        }
+    }
 }
