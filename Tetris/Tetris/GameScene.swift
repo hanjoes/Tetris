@@ -67,8 +67,11 @@ class GameScene: SKScene {
         }
     }
     
-    /// Last time in Double the polyomino in the arena dropped.
-    var lastDropTime: Double = 0
+    /// Last time the polyomino in the arena dropped.
+    var lastDropTime: Double = 0.0
+    
+    /// Last time the polyomino in the arena moved horizontally.
+    var lastMoveTime: Double = 0.0
     
     /// There will be a preparing polyomino anytime when the game is in progress.
     var preparingPolyomino: SKPolyomino! {
@@ -171,6 +174,11 @@ private extension GameScene {
         if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
             lastDropTime = currentTime
             droppingPolyomino.drop()
+        }
+        
+        if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
+            lastMoveTime = currentTime
+            droppingPolyomino.moveHorizontally()
         }
     }
 
