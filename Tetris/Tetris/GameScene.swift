@@ -15,40 +15,45 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.SpawnAreaKey)!
     }
     
-    /// Left button.
     var leftButton: SKNode {
         return childNode(withName: GameConstants.LeftButtonKey)!
     }
     
+    var leftButtonDown = false
+    
     var leftButtonTouches = Set<UITouch>() {
         didSet {
             if !leftButtonTouches.isEmpty {
-                print("Left Added")
+                leftButtonDown = true
+                droppingPolyomino.direction = .left
             }
             else {
-                print("Left empty")
+                leftButtonDown = false
+                droppingPolyomino.direction = rightButtonDown ? .right : .none
             }
         }
     }
     
-    /// Right button.
     var rightButton: SKNode {
         return childNode(withName: GameConstants.RightButtonKey)!
     }
     
+    var rightButtonDown = false
+    
     var rightButtonTouches = Set<UITouch>() {
         didSet {
             if !rightButtonTouches.isEmpty {
-                print("Right Added")
+                rightButtonDown = true
+                droppingPolyomino.direction = .right
             }
             else {
-                print("Right empty")
+                rightButtonDown = false
+                droppingPolyomino.direction = leftButtonDown ? .left : .none
             }
         }
     }
     
     
-    /// Down button.
     var downButton: SKNode {
         return childNode(withName: GameConstants.DownButtonKey)!
     }
@@ -56,10 +61,8 @@ class GameScene: SKScene {
     var downButtonTouches = Set<UITouch>() {
         didSet {
             if !downButtonTouches.isEmpty {
-                print("Down Added")
             }
             else {
-                print("Down empty")
             }
         }
     }
@@ -77,12 +80,7 @@ class GameScene: SKScene {
     }
     
     /// Similar to `preparingPolyomino` there will always be one dropping.
-    var droppingPolyomino: SKPolyomino! {
-        didSet {
-            droppingPolyomino.move(to: arena)
-            droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
-        }
-    }
+    var droppingPolyomino: SKPolyomino!
     
     /// Creator that creates polyominoes in the game.
     var creator: PolyominoCreator!
@@ -165,6 +163,8 @@ private extension GameScene {
     func updateDroppingPolyomino(_ currentTime: TimeInterval) {
         if droppingPolyomino == nil {
             droppingPolyomino = preparingPolyomino
+            droppingPolyomino.move(to: arena)
+            droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
             preparingPolyomino = nil
         }
         
