@@ -15,6 +15,9 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.SpawnAreaKey)!
     }
     
+    /// Nodes that will not move any more.
+    var stableNodes = [SKNode]()
+    
     var leftButton: SKNode {
         return childNode(withName: GameConstants.LeftButtonKey)!
     }
@@ -171,15 +174,40 @@ private extension GameScene {
             preparingPolyomino = nil
         }
         
-        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
-            lastDropTime = currentTime
-            droppingPolyomino.drop()
-        }
-        
         if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
             lastMoveTime = currentTime
             droppingPolyomino.moveHorizontally()
         }
+        
+        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
+            lastDropTime = currentTime
+            if canDrop {
+                droppingPolyomino.drop()
+            }
+            else {
+                stableNodes = stableNodes + droppingPolyomino.spriteNodes
+                droppingPolyomino = nil
+            }
+        }
+        
     }
 
+    var canDrop: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: 0, y: -scale))
+            if nextPosition.y < -(arena.frame.height / 2) {
+                noHit = false
+            }
+            else {
+                for stableNode in stableNodes {
+                    if nextPosition == stableNode.frame.origin {
+                        noHit = false
+                        break
+                    }
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
 }

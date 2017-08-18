@@ -13,6 +13,6 @@ struct GameConstants {
     static let DownButtonKey = "DownButton"
     
     /// Interval for a piece to drop by one cell in second.
-    static let DefaultDropInterval = 1.0
+    static let DefaultDropInterval = 0.1
     static let DefaultComplexity = 4
 }
