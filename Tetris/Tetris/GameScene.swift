@@ -29,6 +29,7 @@ class GameScene: SKScene {
             if !leftButtonTouches.isEmpty {
                 leftButtonDown = true
                 droppingPolyomino.direction = .left
+                moveHorizontally()
             }
             else {
                 leftButtonDown = false
@@ -48,6 +49,7 @@ class GameScene: SKScene {
             if !rightButtonTouches.isEmpty {
                 rightButtonDown = true
                 droppingPolyomino.direction = .right
+                moveHorizontally()
             }
             else {
                 rightButtonDown = false
@@ -162,6 +164,21 @@ private extension GameScene {
         preparingPolyomino.add(to: spawnArea)
     }
     
+    func moveHorizontally() {
+        switch droppingPolyomino.direction {
+        case .left:
+            if canMoveLeft {
+                droppingPolyomino.moveLeft()
+            }
+        case .right:
+            if canMoveRight {
+                droppingPolyomino.moveRight()
+            }
+        default:
+            break
+        }
+    }
+    
     /// Update the dropping polyomino, this method will ensure we have a
     /// polyomino in the arena and preparing polyomino will be updated after
     /// we used the polyomino in spawning area.
@@ -176,7 +193,7 @@ private extension GameScene {
         
         if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
             lastMoveTime = currentTime
-            droppingPolyomino.moveHorizontally()
+            moveHorizontally()
         }
         
         if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
@@ -197,6 +214,44 @@ private extension GameScene {
             var noHit = true
             let nextPosition = $0.frame.origin.translate(by: CGPoint(x: 0, y: -scale))
             if nextPosition.y < -(arena.frame.height / 2) {
+                noHit = false
+            }
+            else {
+                for stableNode in stableNodes {
+                    if nextPosition == stableNode.frame.origin {
+                        noHit = false
+                        break
+                    }
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    var canMoveLeft: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: -scale, y: 0))
+            if nextPosition.x < -(arena.frame.width / 2) {
+                noHit = false
+            }
+            else {
+                for stableNode in stableNodes {
+                    if nextPosition == stableNode.frame.origin {
+                        noHit = false
+                        break
+                    }
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    var canMoveRight: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: scale, y: 0))
+            if nextPosition.x > (arena.frame.width / 2) {
                 noHit = false
             }
             else {

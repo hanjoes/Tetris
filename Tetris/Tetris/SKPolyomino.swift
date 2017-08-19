@@ -43,11 +43,7 @@ struct SKPolyomino {
     }
     
     /// Horizontal movement direction.
-    var direction: HorizontalDirection = .none {
-        didSet {
-            moveHorizontally()
-        }
-    }
+    var direction: HorizontalDirection = .none
     
     /// Initializer from a prototype and the scale.
     ///
@@ -92,17 +88,6 @@ struct SKPolyomino {
         }
     }
     
-    func moveHorizontally() {
-        switch direction {
-        case .left:
-            moveLeft()
-        case .right:
-            moveRight()
-        default:
-            break
-        }
-    }
-    
     func drop() {
         for child in spriteNodes {
             child.position = child.position.translate(by: CGPoint(x: 0, y: -scale))
@@ -110,34 +95,14 @@ struct SKPolyomino {
     }
 
     func moveLeft() {
-        guard canMoveLeft else {
-            return
-        }
         for child in spriteNodes {
             child.position = child.position.translate(by: CGPoint(x: -scale, y: 0))
         }
     }
     
     func moveRight() {
-        guard canMoveRight else {
-            return
-        }
         for child in spriteNodes {
             child.position = child.position.translate(by: CGPoint(x: scale, y: 0))
         }
-    }
-}
-
-private extension SKPolyomino {
-    var canMoveLeft: Bool {
-        return spriteNodes.filter {
-            $0.frame.minX <= -($0.parent!.frame.width / 2)
-        }.isEmpty
-    }
-    
-    var canMoveRight: Bool {
-        return spriteNodes.filter {
-            $0.frame.maxX >= $0.parent!.frame.width / 2
-        }.isEmpty
     }
 }
