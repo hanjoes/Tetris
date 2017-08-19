@@ -72,6 +72,20 @@ class GameScene: SKScene {
         }
     }
     
+    
+    var rotateButton: SKNode {
+        return childNode(withName: GameConstants.RotateButtonKey)!
+    }
+    
+    var rotateButtonTouches = Set<UITouch>() {
+        didSet {
+            if !rotateButtonTouches.isEmpty {
+            }
+            else {
+            }
+        }
+    }
+    
     /// Last time the polyomino in the arena dropped.
     var lastDropTime: Double = 0.0
     
@@ -120,6 +134,9 @@ class GameScene: SKScene {
             else if downButton.contains(touchPoint) {
                 downButtonTouches.insert(touch)
             }
+            else if rotateButton.contains(touchPoint) {
+                rotateButtonTouches.insert(touch)
+            }
         }
     }
     
@@ -137,6 +154,9 @@ class GameScene: SKScene {
             }
             if downButtonTouches.contains(touch) {
                 _ = downButtonTouches.remove(touch)
+            }
+            if rotateButtonTouches.contains(touch) {
+                _ = rotateButtonTouches.remove(touch)
             }
         }
     }
