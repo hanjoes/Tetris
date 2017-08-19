@@ -94,6 +94,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB653B371F48B14D004AA01E /* Polyomino */ = {
+			isa = PBXGroup;
+			children = (
+				DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */,
+				DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */,
+				DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */,
+			);
+			path = Polyomino;
+			sourceTree = "<group>";
+		};
+		DB653B381F48B16B004AA01E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
+				DB8B6C861F397BB600DD4694 /* Actions.sks */,
+				DB8B6C8C1F397BB600DD4694 /* Main.storyboard */,
+				DB8B6C8F1F397BB600DD4694 /* Assets.xcassets */,
+				DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */,
+				DB8B6C941F397BB600DD4694 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DB8B6C761F397BB500DD4694 = {
 			isa = PBXGroup;
 			children = (
@@ -117,19 +140,12 @@
 		DB8B6C811F397BB600DD4694 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				DB653B381F48B16B004AA01E /* Supporting Files */,
+				DB653B371F48B14D004AA01E /* Polyomino */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
-				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
-				DB8B6C861F397BB600DD4694 /* Actions.sks */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
-				DB8B6C8C1F397BB600DD4694 /* Main.storyboard */,
-				DB8B6C8F1F397BB600DD4694 /* Assets.xcassets */,
-				DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */,
-				DB8B6C941F397BB600DD4694 /* Info.plist */,
-				DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */,
-				DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */,
 				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
-				DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */,
 				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 			);
 			path = Tetris;
@@ -464,7 +480,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 687GE6J6LA;
-				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tetris/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hanjoes.Tetris;
@@ -479,7 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 687GE6J6LA;
-				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tetris/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hanjoes.Tetris;
