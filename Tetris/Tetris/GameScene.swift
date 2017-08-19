@@ -251,7 +251,7 @@ private extension GameScene {
         return droppingPolyomino.spriteNodes.filter {
             var noHit = true
             let nextPosition = $0.frame.origin.translate(by: CGPoint(x: scale, y: 0))
-            if nextPosition.x > (arena.frame.width / 2) {
+            if nextPosition.x > (arena.frame.width / 2 - scale) {
                 noHit = false
             }
             else {
