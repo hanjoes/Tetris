@@ -185,10 +185,7 @@ private extension GameScene {
     /// - Parameter currentTime: time when update is called
     func updateDroppingPolyomino(_ currentTime: TimeInterval) {
         if droppingPolyomino == nil {
-            droppingPolyomino = preparingPolyomino
-            droppingPolyomino.move(to: arena)
-            droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
-            preparingPolyomino = nil
+            stagePolyomino()
         }
         
         if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
@@ -203,10 +200,16 @@ private extension GameScene {
             }
             else {
                 stableNodes = stableNodes + droppingPolyomino.spriteNodes
-                droppingPolyomino = nil
+                stagePolyomino()
             }
         }
-        
+    }
+    
+    func stagePolyomino() {
+        droppingPolyomino = preparingPolyomino
+        droppingPolyomino.move(to: arena)
+        droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
+        preparingPolyomino = nil
     }
 
     var canDrop: Bool {
