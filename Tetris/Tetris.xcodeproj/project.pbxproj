@@ -117,6 +117,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DB653B3B1F48B30A004AA01E /* Game Components */ = {
+			isa = PBXGroup;
+			children = (
+				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
+			);
+			path = "Game Components";
+			sourceTree = "<group>";
+		};
 		DB8B6C761F397BB500DD4694 = {
 			isa = PBXGroup;
 			children = (
@@ -141,11 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				DB653B381F48B16B004AA01E /* Supporting Files */,
+				DB653B3B1F48B30A004AA01E /* Game Components */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
-				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
 				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 			);
 			path = Tetris;

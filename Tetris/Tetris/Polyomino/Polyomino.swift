@@ -34,6 +34,27 @@ struct Polyomino {
         }
     }
     
+    /// The _middle point_ of an `Polyomino` is composed of the
+    /// medium of sorted `x`s and the medium of sorted `y`s.
+    var midPoint: CGPoint {
+        var xSet = Set<CGFloat>()
+        var ySet = Set<CGFloat>()
+        for point in points {
+            xSet.insert(point.x)
+            ySet.insert(point.y)
+        }
+        let sortedX = xSet.sorted()
+        let sortedY = ySet.sorted()
+        // the mid point in our case is really the medium of x and y
+        let xMidIndex = sortedX.count > 1 ? Int(floor(Double(sortedX.count) / 2.0)) : 0
+        let yMidIndex = sortedY.count > 1 ? Int(ceil(Double(sortedY.count) / 2.0)) : 0
+        let midX = sortedX[xMidIndex]
+        let midY = sortedY[yMidIndex]
+        print("x: \(midX) y: \(midY)")
+        return CGPoint(x: midX, y: midY)
+    }
+
+    
     /// Sorts two points. A point to the left of another point appears
     /// before. A point above another point appears before.
     ///

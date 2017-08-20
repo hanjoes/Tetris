@@ -80,6 +80,10 @@ class GameScene: SKScene {
     var rotateButtonTouches = Set<UITouch>() {
         didSet {
             if !rotateButtonTouches.isEmpty {
+                let translations = rotationTranslations
+                if canTurnClockwise(by: translations) {
+                    droppingPolyomino.turn(by: translations)
+                }
             }
             else {
             }
@@ -188,11 +192,11 @@ private extension GameScene {
         switch droppingPolyomino.direction {
         case .left:
             if canMoveLeft {
-                droppingPolyomino.moveLeft()
+                droppingPolyomino.move(by: CGPoint(x: -scale, y: 0))
             }
         case .right:
             if canMoveRight {
-                droppingPolyomino.moveRight()
+                droppingPolyomino.move(by: CGPoint(x: scale, y: 0))
             }
         default:
             break
@@ -216,7 +220,7 @@ private extension GameScene {
         if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
             lastDropTime = currentTime
             if canDrop {
-                droppingPolyomino.drop()
+                droppingPolyomino.move(by: CGPoint(x: 0, y: -scale))
             }
             else {
                 stableNodes = stableNodes + droppingPolyomino.spriteNodes
@@ -287,5 +291,45 @@ private extension GameScene {
             }
             return noHit
         }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    func canTurnClockwise(by translations: [CGPoint]) -> Bool {
+        guard translations.count == droppingPolyomino.spriteNodes.count else {
+            return false
+        }
+        
+        for index in 0..<translations.count {
+            let node = droppingPolyomino.spriteNodes[index]
+            let translation = translations[index]
+            let nextPosition = node.frame.origin.translate(by: translation)
+            if nextPosition.x > (arena.frame.width / 2 - scale) ||
+                nextPosition.x < -(arena.frame.width / 2) ||
+                nextPosition.y < -(arena.frame.height / 2 - scale) {
+                return false
+            }
+            else {
+                for stableNode in stableNodes {
+                    if nextPosition == stableNode.frame.origin {
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
+    var rotationTranslations: [CGPoint] {
+        let anchorPoint = droppingPolyomino.anchorPoint
+        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { print($0.frame.origin)})")
+        let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
+        return droppingPolyomino.spriteNodes.map {
+            let x = $0.frame.minX
+            let y = $0.frame.minY
+            let bottomLeftCorner = CGPoint(x: x, y: y)
+            let translated = bottomLeftCorner.translate(by: centeringTranslation)
+            let rotated = CGPoint(x: translated.y, y: -translated.x)
+            let rotationTranslation = translated.translation(to: rotated)
+            return rotationTranslation
+        }
     }
 }

@@ -14,6 +14,6 @@ struct GameConstants {
     static let RotateButtonKey = "RotateButton"
     
     /// Interval for a piece to drop by one cell in second.
-    static let DefaultDropInterval = 0.1
+    static let DefaultDropInterval = 0.3
     static let DefaultComplexity = 4
 }
