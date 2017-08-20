@@ -320,7 +320,7 @@ private extension GameScene {
     
     var rotationTranslations: [CGPoint] {
         let anchorPoint = droppingPolyomino.anchorPoint
-        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { print($0.frame.origin)})")
+        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
         let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
         return droppingPolyomino.spriteNodes.map {
             let x = $0.frame.minX
