@@ -108,7 +108,7 @@ struct SKPolyomino {
     }
     
     func turn(by translations: [CGPoint]) {
-        guard translations.count == spriteNodes.count else {
+        guard translations.count == spriteNodes.count, prototype.canRotate else {
             return
         }
         
@@ -116,10 +116,6 @@ struct SKPolyomino {
             let node = spriteNodes[index]
             node.position = node.position.translate(by: translations[index])
         }
-    }
-    
-    
-    func turnClockwise() {
     }
 }
 

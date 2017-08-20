@@ -18,6 +18,23 @@ struct Polyomino {
     /// - Note: The points are always sorted. see `sorter` for detail.
     let points: [CGPoint]
     
+    /// Whether this polyomino can rotate or not.
+    /// For example, those piece are same after any rotation will not
+    /// be allowed to rotate. (For e.g. the "square" in tetris.)
+    var canRotate: Bool {
+        guard !points.isEmpty else {
+            return false
+        }
+        var current = self
+        for _ in 0..<4 {
+            current = current.clockwiseRotated(around: current.points.first!).normalized()
+            if current != self {
+                return true
+            }
+        }
+        return false
+    }
+    
     /// A list of `CGPoint`s we can "grow" the polyomino by adding cells using them
     /// as bottom-left corner.
     var growthPoints: [CGPoint] {
