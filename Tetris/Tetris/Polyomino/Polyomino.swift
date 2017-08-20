@@ -47,10 +47,9 @@ struct Polyomino {
         let sortedY = ySet.sorted()
         // the mid point in our case is really the medium of x and y
         let xMidIndex = sortedX.count > 1 ? Int(floor(Double(sortedX.count) / 2.0)) : 0
-        let yMidIndex = sortedY.count > 1 ? Int(ceil(Double(sortedY.count) / 2.0)) : 0
+        let yMidIndex = sortedY.count > 1 ? Int(Double(sortedY.count) / 2.0) : 0
         let midX = sortedX[xMidIndex]
         let midY = sortedY[yMidIndex]
-        print("x: \(midX) y: \(midY)")
         return CGPoint(x: midX, y: midY)
     }
 
