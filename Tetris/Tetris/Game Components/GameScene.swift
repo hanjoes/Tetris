@@ -185,7 +185,7 @@ private extension GameScene {
         let prototype = creator.randomPolyomino
         preparingPolyomino = SKPolyomino(from: prototype, withScale: scale)
         let spawnArea = childNode(withName: GameConstants.SpawnAreaKey)!
-        preparingPolyomino.add(to: spawnArea)
+        preparingPolyomino.center(to: spawnArea)
     }
     
     func moveHorizontally() {
@@ -320,7 +320,7 @@ private extension GameScene {
     
     var rotationTranslations: [CGPoint] {
         let anchorPoint = droppingPolyomino.anchorPoint
-        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
+//        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
         let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
         return droppingPolyomino.spriteNodes.map {
             let x = $0.frame.minX

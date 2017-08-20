@@ -100,6 +100,14 @@ struct SKPolyomino {
         }
     }
     
+    mutating func center(to parent: SKNode?) {
+        move(to: parent)
+        let midPointX = prototype.midPoint.x
+        let midPointY = prototype.midPoint.y
+        let midPoint = CGPoint(x: midPointX * scale, y: midPointY * scale)
+        position = position.translate(by: midPoint.translation(to: CGPoint.zero))
+    }
+    
     mutating func move(by translation: CGPoint) {
         accumulatedTranslation = accumulatedTranslation.translate(by: translation)
         for child in spriteNodes {
