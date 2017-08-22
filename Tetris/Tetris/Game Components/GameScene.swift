@@ -15,8 +15,8 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.SpawnAreaKey)!
     }
     
-    /// Nodes that will not move any more.
-    var stableNodes = [SKNode]()
+    /// The buckets by row, containing stable nodes.
+    var nodesBuckets = [[SKNode]]()
     
     var leftButton: SKNode {
         return childNode(withName: GameConstants.LeftButtonKey)!
@@ -118,6 +118,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         initializePolyominoCreator()
+        initializeBuckets()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -170,6 +171,98 @@ class GameScene: SKScene {
 }
 
 private extension GameScene {
+
+
+    var canDrop: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: 0, y: -scale))
+            if nextPosition.y < -(arena.frame.height / 2) {
+                noHit = false
+            }
+            else {
+                if checkOverlap(forPosition: nextPosition) {
+                    noHit = false
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    var canMoveLeft: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: -scale, y: 0))
+            if nextPosition.x < -(arena.frame.width / 2) {
+                noHit = false
+            }
+            else {
+                if checkOverlap(forPosition: nextPosition) {
+                    noHit = false
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    var canMoveRight: Bool {
+        return droppingPolyomino.spriteNodes.filter {
+            var noHit = true
+            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: scale, y: 0))
+            if nextPosition.x > (arena.frame.width / 2 - scale) {
+                noHit = false
+            }
+            else {
+                if checkOverlap(forPosition: nextPosition) {
+                    noHit = false
+                }
+            }
+            return noHit
+        }.count == droppingPolyomino.spriteNodes.count
+    }
+    
+    var rotationTranslations: [CGPoint] {
+        let anchorPoint = droppingPolyomino.anchorPoint
+//        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
+        let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
+        return droppingPolyomino.spriteNodes.map {
+            let x = $0.frame.minX
+            let y = $0.frame.minY
+            let bottomLeftCorner = CGPoint(x: x, y: y)
+            let translated = bottomLeftCorner.translate(by: centeringTranslation)
+            let rotated = CGPoint(x: translated.y, y: -translated.x)
+            let rotationTranslation = translated.translation(to: rotated)
+            return rotationTranslation
+        }
+    }
+    
+    func canTurnClockwise(by translations: [CGPoint]) -> Bool {
+        guard translations.count == droppingPolyomino.spriteNodes.count else {
+            return false
+        }
+        
+        for index in 0..<translations.count {
+            let node = droppingPolyomino.spriteNodes[index]
+            let translation = translations[index]
+            let nextPosition = node.frame.origin.translate(by: translation)
+            if nextPosition.x > (arena.frame.width / 2 - scale) ||
+                nextPosition.x < -(arena.frame.width / 2) ||
+                nextPosition.y < -(arena.frame.height / 2 - scale) {
+                return false
+            }
+            else {
+                if checkOverlap(forPosition: nextPosition) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    func initializeBuckets() {
+        let numRow = Int(arena.frame.height / scale)
+        nodesBuckets = [[SKNode]](repeating: [SKNode](), count: numRow)
+    }
     
     /// Initializes the creator for `Polyomino`.
     func initializePolyominoCreator() {
@@ -223,9 +316,63 @@ private extension GameScene {
                 droppingPolyomino.move(by: CGPoint(x: 0, y: -scale))
             }
             else {
-                stableNodes = stableNodes + droppingPolyomino.spriteNodes
+                pour(nodes: droppingPolyomino.spriteNodes)
+                clearIfRowFull()
                 stagePolyomino()
             }
+        }
+    }
+    
+    func pour(nodes: [SKNode]) {
+        for node in nodes {
+            let rowIndex = Int((node.frame.minY + arena.frame.height / 2) / scale)
+            nodesBuckets[rowIndex].append(node)
+        }
+    }
+    
+    func clearIfRowFull() {
+        let fullRowNum = Int(arena.frame.width / scale)
+        for rowIndex in 0..<nodesBuckets.count {
+            let row = nodesBuckets[rowIndex]
+            if row.count == fullRowNum {
+                _ = row.map { $0.removeFromParent() }
+                nodesBuckets[rowIndex] = [SKNode]()
+            }
+        }
+        
+        compressRows()
+    }
+    
+    func checkOverlap(forPosition position: CGPoint) -> Bool {
+        for row in nodesBuckets {
+            for node in row {
+                if position == node.frame.origin {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func compressRows() {
+        let numRows = Int(arena.frame.height / scale)
+        for rowIndex in 1..<numRows {
+            if nodesBuckets[rowIndex - 1].isEmpty {
+                nodesBuckets[rowIndex - 1] = nodesBuckets[rowIndex]
+                descend(rowIndex: rowIndex)
+                nodesBuckets[rowIndex] = [SKNode]()
+            }
+        }
+    }
+    
+    func descend(rowIndex index: Int) {
+        guard index >= 0 && index < nodesBuckets.count else {
+            return
+        }
+        
+        let row = nodesBuckets[index]
+        for node in row {
+            node.position = node.position.translate(by: CGPoint(x: 0, y: -scale))
         }
     }
     
@@ -234,102 +381,5 @@ private extension GameScene {
         droppingPolyomino.move(to: arena)
         droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
         preparingPolyomino = nil
-    }
-
-    var canDrop: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: 0, y: -scale))
-            if nextPosition.y < -(arena.frame.height / 2) {
-                noHit = false
-            }
-            else {
-                for stableNode in stableNodes {
-                    if nextPosition == stableNode.frame.origin {
-                        noHit = false
-                        break
-                    }
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    var canMoveLeft: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: -scale, y: 0))
-            if nextPosition.x < -(arena.frame.width / 2) {
-                noHit = false
-            }
-            else {
-                for stableNode in stableNodes {
-                    if nextPosition == stableNode.frame.origin {
-                        noHit = false
-                        break
-                    }
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    var canMoveRight: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: scale, y: 0))
-            if nextPosition.x > (arena.frame.width / 2 - scale) {
-                noHit = false
-            }
-            else {
-                for stableNode in stableNodes {
-                    if nextPosition == stableNode.frame.origin {
-                        noHit = false
-                        break
-                    }
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    func canTurnClockwise(by translations: [CGPoint]) -> Bool {
-        guard translations.count == droppingPolyomino.spriteNodes.count else {
-            return false
-        }
-        
-        for index in 0..<translations.count {
-            let node = droppingPolyomino.spriteNodes[index]
-            let translation = translations[index]
-            let nextPosition = node.frame.origin.translate(by: translation)
-            if nextPosition.x > (arena.frame.width / 2 - scale) ||
-                nextPosition.x < -(arena.frame.width / 2) ||
-                nextPosition.y < -(arena.frame.height / 2 - scale) {
-                return false
-            }
-            else {
-                for stableNode in stableNodes {
-                    if nextPosition == stableNode.frame.origin {
-                        return false
-                    }
-                }
-            }
-        }
-        return true
-    }
-    
-    var rotationTranslations: [CGPoint] {
-        let anchorPoint = droppingPolyomino.anchorPoint
-//        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
-        let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
-        return droppingPolyomino.spriteNodes.map {
-            let x = $0.frame.minX
-            let y = $0.frame.minY
-            let bottomLeftCorner = CGPoint(x: x, y: y)
-            let translated = bottomLeftCorner.translate(by: centeringTranslation)
-            let rotated = CGPoint(x: translated.y, y: -translated.x)
-            let rotationTranslation = translated.translation(to: rotated)
-            return rotationTranslation
-        }
     }
 }
