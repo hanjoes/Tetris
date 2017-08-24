@@ -336,10 +336,9 @@ private extension GameScene {
             let row = nodesBuckets[rowIndex]
             if row.count == fullRowNum {
                 _ = row.map { $0.removeFromParent() }
-                nodesBuckets[rowIndex] = [SKNode]()
+                nodesBuckets[rowIndex].removeAll()
             }
         }
-        
         compressRows()
     }
     
@@ -356,23 +355,29 @@ private extension GameScene {
     
     func compressRows() {
         let numRows = Int(arena.frame.height / scale)
-        for rowIndex in 1..<numRows {
-            if nodesBuckets[rowIndex - 1].isEmpty {
-                nodesBuckets[rowIndex - 1] = nodesBuckets[rowIndex]
-                descend(rowIndex: rowIndex)
-                nodesBuckets[rowIndex] = [SKNode]()
+        for rowIndex in 0..<numRows {
+            var currentRow = rowIndex
+            if nodesBuckets[currentRow].isEmpty {
+                while nodesBuckets[currentRow].isEmpty {
+                    currentRow += 1
+                    if currentRow == numRows {
+                        return
+                    }
+                }
+                descend(rowIndex: currentRow, by: currentRow - rowIndex)
+                nodesBuckets[rowIndex] = nodesBuckets[currentRow]
+                nodesBuckets[currentRow].removeAll()
             }
         }
     }
     
-    func descend(rowIndex index: Int) {
+    func descend(rowIndex index: Int, by level: Int) {
         guard index >= 0 && index < nodesBuckets.count else {
             return
         }
-        
         let row = nodesBuckets[index]
         for node in row {
-            node.position = node.position.translate(by: CGPoint(x: 0, y: -scale))
+            node.position = node.position.translate(by: CGPoint(x: 0, y: -scale * CGFloat(level)))
         }
     }
     
