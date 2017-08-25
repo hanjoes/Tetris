@@ -120,6 +120,7 @@
 		DB653B3B1F48B30A004AA01E /* Game Components */ = {
 			isa = PBXGroup;
 			children = (
+				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
 				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
 			);
@@ -154,7 +155,6 @@
 				DB653B371F48B14D004AA01E /* Polyomino */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
-				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";

@@ -22,6 +22,8 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.LeftButtonKey)!
     }
     
+    var currentDropInterval = GameConstants.DefaultDropInterval
+    
     var leftButtonDown = false
     
     var leftButtonTouches = Set<UITouch>() {
@@ -66,8 +68,10 @@ class GameScene: SKScene {
     var downButtonTouches = Set<UITouch>() {
         didSet {
             if !downButtonTouches.isEmpty {
+                currentDropInterval = GameConstants.HurriedUpDropInterval
             }
             else {
+                currentDropInterval = GameConstants.DefaultDropInterval
             }
         }
     }
@@ -310,7 +314,7 @@ private extension GameScene {
             moveHorizontally()
         }
         
-        if currentTime - lastDropTime >= GameConstants.DefaultDropInterval {
+        if currentTime - lastDropTime >= currentDropInterval {
             lastDropTime = currentTime
             if canDrop {
                 droppingPolyomino.move(by: CGPoint(x: 0, y: -scale))

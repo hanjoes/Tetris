@@ -5,6 +5,7 @@ struct GameConstants {
     static let VerticalCellNum: CGFloat = 20
     
     static let HorizontalMovingInterval = 0.2
+    static let HurriedUpDropInterval = 0.05
     
     static let SpawnAreaKey = "SpawnArea"
     static let TetrisArenaKey = "TetrisArena"
