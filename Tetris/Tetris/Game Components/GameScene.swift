@@ -178,6 +178,9 @@ class GameScene: SKScene {
 
 private extension GameScene {
 
+    var hitSound: SKAction {
+        return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
+    }
 
     var canDrop: Bool {
         return droppingPolyomino.spriteNodes.filter {
@@ -329,6 +332,7 @@ private extension GameScene {
                 pour(nodes: droppingPolyomino.spriteNodes)
                 clearIfRowFull()
                 stagePolyomino()
+                run(hitSound)
             }
         }
     }

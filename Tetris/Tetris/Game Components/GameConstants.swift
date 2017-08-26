@@ -17,4 +17,6 @@ struct GameConstants {
     /// Interval for a piece to drop by one cell in second.
     static let DefaultDropInterval = 0.3
     static let DefaultComplexity = 4
+    
+    static let HitSoundFileName = "hollow_thud.mp3"
 }
