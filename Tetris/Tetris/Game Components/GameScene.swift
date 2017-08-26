@@ -32,6 +32,7 @@ class GameScene: SKScene {
                 leftButtonDown = true
                 droppingPolyomino.direction = .left
                 moveHorizontally()
+                lastMoveTime = 0.0
             }
             else {
                 leftButtonDown = false
@@ -52,6 +53,7 @@ class GameScene: SKScene {
                 rightButtonDown = true
                 droppingPolyomino.direction = .right
                 moveHorizontally()
+                lastMoveTime = 0.0
             }
             else {
                 rightButtonDown = false
@@ -310,8 +312,12 @@ private extension GameScene {
         }
         
         if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
+            // don't move when we haven't moved, removing this line
+            // will cause double movement issue.
+            if lastMoveTime != 0.0 {
+                moveHorizontally()
+            }
             lastMoveTime = currentTime
-            moveHorizontally()
         }
         
         if currentTime - lastDropTime >= currentDropInterval {
