@@ -1,4 +1,4 @@
-import UIKit
+import SpriteKit
 
 /// Creates polyominoes.
 struct PolyominoCreator {
@@ -9,22 +9,31 @@ struct PolyominoCreator {
     /// Possible polyominoes that can be created from this creator.
     var possiblePolyominoes = [Polyomino]()
     
+    let blockTextureAtlas: SKTextureAtlas
+    
     /// Initializes a creator that can create polyominoes of specific
     /// complexity.
     ///
     /// - Parameter num: number of cells in the polyominoes created
-    init(forCellNum num: Int) {
+    /// - Parameter atlas: the `SKTextureAtlas` provides textures for the
+    /// polyominoes created by this creator
+    init(forCellNum num: Int, withAtlas atlas: SKTextureAtlas) {
         self.cellNum = num
+        self.blockTextureAtlas = atlas
         initializePossiblePolyominoes()
     }
     
-    /// Randomly get a `Polyomino` from the possible polyominoes
+    /// Randomly creates a `Polyomino` from the possible polyominoes
     /// created by this creator.
     ///
-    /// - Returns: a randomly chosen `Polyomino`
-    var randomPolyomino: Polyomino {
+    /// - Parameter scale: the actual scale in the game scene
+    /// - Returns: a `SKPolyomino` based on a randomly chosen prototype
+    func makeRandomPolyomino(withScale scale: CGFloat) -> SKPolyomino {
         let index = Int(arc4random() % UInt32(possiblePolyominoes.count))
-        return possiblePolyominoes[index]
+        let prototypeChosen = possiblePolyominoes[index]
+        let textureIndex = index % blockTextureAtlas.textureNames.count
+        let texture = blockTextureAtlas.textureNamed(blockTextureAtlas.textureNames[textureIndex])
+        return SKPolyomino(from: prototypeChosen, withScale: scale, withTexture: texture)
     }
     
 }

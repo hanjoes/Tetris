@@ -62,13 +62,15 @@ struct SKPolyomino {
     /// - Parameters:
     ///   - prototype: prototype for building this piece
     ///   - scale: scale of the cells in this piece
-    init(from prototype: Polyomino, withScale scale: CGFloat) {
+    ///   - texture: texture used on each block
+    init(from prototype: Polyomino, withScale scale: CGFloat, withTexture texture: SKTexture) {
         self.scale = scale
         self.prototype = prototype
         spriteNodes = prototype.points.map {
             let skNode = SKSpriteNode(texture: nil, color: .blue, size: CGSize(width: scale, height: scale))
             skNode.position = CGPoint(x: $0.x * scale, y: $0.y * scale)
             skNode.anchorPoint = CGPoint(x: 0, y: 0)
+            skNode.texture = texture
             return skNode
         }
     }

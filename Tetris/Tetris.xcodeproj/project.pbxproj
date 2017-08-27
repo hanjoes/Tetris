@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		DB04E1BB1F3D663F00B60083 /* SKPolyomino.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */; };
 		DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */; };
+		DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */; };
+		DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */; };
+		DB21CAD51F538DA200EE73C0 /* PinkBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */; };
+		DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */; };
 		DB3408E91F3ADDD5000A1F5F /* PolyominoCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */; };
 		DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */; };
 		DB4558EC1F3F805C002BD1AA /* CGPointExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */; };
@@ -21,7 +25,6 @@
 		DB8B6C891F397BB600DD4694 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C881F397BB600DD4694 /* GameScene.swift */; };
 		DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */; };
 		DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C8C1F397BB600DD4694 /* Main.storyboard */; };
-		DB8B6C901F397BB600DD4694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C8F1F397BB600DD4694 /* Assets.xcassets */; };
 		DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */; };
 		DB8B6C9E1F397BB600DD4694 /* PolyominoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C9D1F397BB600DD4694 /* PolyominoTests.swift */; };
 		DB8B6CA91F397BB600DD4694 /* TetrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6CA81F397BB600DD4694 /* TetrisUITests.swift */; };
@@ -47,6 +50,11 @@
 /* Begin PBXFileReference section */
 		DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPolyomino.swift; sourceTree = "<group>"; };
 		DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hollow_thud.mp3; sourceTree = "<group>"; };
+		DB21CACE1F53891E00EE73C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GreenBlocks.atlas; sourceTree = "<group>"; };
+		DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PinkBlocks.atlas; sourceTree = "<group>"; };
+		DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = YellowBlocks.atlas; sourceTree = "<group>"; };
+		DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BlueBlocks.atlas; sourceTree = "<group>"; };
 		DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreator.swift; sourceTree = "<group>"; };
 		DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyomino.swift; sourceTree = "<group>"; };
 		DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionTests.swift; sourceTree = "<group>"; };
@@ -60,7 +68,6 @@
 		DB8B6C881F397BB600DD4694 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		DB8B6C8D1F397BB600DD4694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DB8B6C8F1F397BB600DD4694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB8B6C921F397BB600DD4694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB8B6C941F397BB600DD4694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB8B6C991F397BB600DD4694 /* TetrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TetrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,10 +124,14 @@
 		DB653B381F48B16B004AA01E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB21CACE1F53891E00EE73C0 /* Assets.xcassets */,
+				DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */,
+				DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */,
+				DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */,
+				DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */,
 				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
 				DB8B6C861F397BB600DD4694 /* Actions.sks */,
 				DB8B6C8C1F397BB600DD4694 /* Main.storyboard */,
-				DB8B6C8F1F397BB600DD4694 /* Assets.xcassets */,
 				DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */,
 				DB8B6C941F397BB600DD4694 /* Info.plist */,
 			);
@@ -294,12 +305,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */,
 				DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */,
 				DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */,
+				DB21CAD51F538DA200EE73C0 /* PinkBlocks.atlas in Resources */,
 				DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */,
-				DB8B6C901F397BB600DD4694 /* Assets.xcassets in Resources */,
 				DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */,
 				DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */,
+				DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */,
+				DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

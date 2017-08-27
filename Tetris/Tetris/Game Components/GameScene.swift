@@ -5,6 +5,8 @@ import GameplayKit
 // TODO: - Switch to GameplayKit
 class GameScene: SKScene {
     
+    var blockTextureAtlas = [SKTextureAtlas]()
+    
     /// The arena where we actually play the game.
     var arena: SKNode {
         return childNode(withName: GameConstants.TetrisArenaKey)!
@@ -123,6 +125,7 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        initializeTextures()
         initializePolyominoCreator()
         initializeBuckets()
     }
@@ -275,7 +278,16 @@ private extension GameScene {
     
     /// Initializes the creator for `Polyomino`.
     func initializePolyominoCreator() {
-        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity)
+        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity, withAtlas: blockTextureAtlas.first!)
+    }
+    
+    func initializeTextures() {
+        blockTextureAtlas = [
+            SKTextureAtlas(named: GameConstants.BlueBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.GreenBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.YellowBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
+        ]
     }
     
     /// Spawn a preparing `Polyomino` at the spawning area.
@@ -284,8 +296,7 @@ private extension GameScene {
             return
         }
         
-        let prototype = creator.randomPolyomino
-        preparingPolyomino = SKPolyomino(from: prototype, withScale: scale)
+        preparingPolyomino = creator.makeRandomPolyomino(withScale: scale)
         let spawnArea = childNode(withName: GameConstants.SpawnAreaKey)!
         preparingPolyomino.center(to: spawnArea)
     }

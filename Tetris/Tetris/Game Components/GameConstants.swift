@@ -19,4 +19,9 @@ struct GameConstants {
     static let DefaultComplexity = 4
     
     static let HitSoundFileName = "hollow_thud.mp3"
+    
+    static let BlueBlockAtlasName = "BlueBlocks"
+    static let GreenBlockAtlasName = "GreenBlocks"
+    static let YellowBlockAtlasName = "YellowBlocks"
+    static let PinkBlockAtlasName = "PinkBlocks"
 }
