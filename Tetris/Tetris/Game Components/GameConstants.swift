@@ -13,6 +13,7 @@ struct GameConstants {
     static let RightButtonKey = "RightButton"
     static let DownButtonKey = "DownButton"
     static let RotateButtonKey = "RotateButton"
+    static let ScoreLabelKey = "ScoreLabel"
     
     /// Interval for a piece to drop by one cell in second.
     static let DefaultDropInterval = 0.3

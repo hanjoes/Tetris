@@ -12,9 +12,20 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.TetrisArenaKey)!
     }
     
+    var score: Int = 0 {
+        didSet {
+            print("updating score")
+            scoreLabel.text = "\(score)"
+        }
+    }
+    
     /// The area where we spawn polyominoes.
     var spawnArea: SKNode {
         return childNode(withName: GameConstants.SpawnAreaKey)!
+    }
+    
+    var scoreLabel: SKLabelNode {
+        return childNode(withName: GameConstants.ScoreLabelKey) as! SKLabelNode
     }
     
     /// The buckets by row, containing stable nodes.
@@ -128,6 +139,7 @@ class GameScene: SKScene {
         initializeTextures()
         initializePolyominoCreator()
         initializeBuckets()
+        initializeScore()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -271,6 +283,10 @@ private extension GameScene {
         return true
     }
     
+    func initializeScore() {
+        score = 0
+    }
+    
     func initializeBuckets() {
         let numRow = Int(arena.frame.height / scale)
         nodesBuckets = [[SKNode]](repeating: [SKNode](), count: numRow)
@@ -357,14 +373,17 @@ private extension GameScene {
     
     func clearIfRowFull() {
         let fullRowNum = Int(arena.frame.width / scale)
+        var rowsCleared = 0
         for rowIndex in 0..<nodesBuckets.count {
             let row = nodesBuckets[rowIndex]
             if row.count == fullRowNum {
                 _ = row.map { $0.removeFromParent() }
                 nodesBuckets[rowIndex].removeAll()
+                rowsCleared += 1
             }
         }
         compressRows()
+        updateScore(withRowsCleared: rowsCleared)
     }
     
     func checkOverlap(forPosition position: CGPoint) -> Bool {
@@ -394,6 +413,13 @@ private extension GameScene {
                 nodesBuckets[currentRow].removeAll()
             }
         }
+    }
+    
+    func updateScore(withRowsCleared rowsCleared: Int) {
+        guard rowsCleared > 0 else {
+            return
+        }
+        score += rowsCleared
     }
     
     func descend(rowIndex index: Int, by level: Int) {
