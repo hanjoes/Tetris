@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB04E1BB1F3D663F00B60083 /* SKPolyomino.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */; };
+		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
 		DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */; };
 		DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */; };
 		DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPolyomino.swift; sourceTree = "<group>"; };
+		DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSpriteNode.swift; sourceTree = "<group>"; };
 		DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hollow_thud.mp3; sourceTree = "<group>"; };
 		DB21CACE1F53891E00EE73C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GreenBlocks.atlas; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		DB19C3051F5533B300B10C2F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -178,9 +181,9 @@
 		DB8B6C811F397BB600DD4694 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				DB653B381F48B16B004AA01E /* Supporting Files */,
 				DB19C3051F5533B300B10C2F /* UIComponents */,
 				DB21CAC11F513E3700EE73C0 /* Sounds */,
-				DB653B381F48B16B004AA01E /* Supporting Files */,
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
@@ -350,6 +353,7 @@
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
+				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,
 				DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */,
 				DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */,
 				DB04E1BB1F3D663F00B60083 /* SKPolyomino.swift in Sources */,

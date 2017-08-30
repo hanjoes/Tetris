@@ -31,83 +31,7 @@ class GameScene: SKScene {
     /// The buckets by row, containing stable nodes.
     var nodesBuckets = [[SKNode]]()
     
-    var leftButton: SKNode {
-        return childNode(withName: GameConstants.LeftButtonKey)!
-    }
-    
     var currentDropInterval = GameConstants.DefaultDropInterval
-    
-    var leftButtonDown = false
-    
-    var leftButtonTouches = Set<UITouch>() {
-        didSet {
-            if !leftButtonTouches.isEmpty {
-                leftButtonDown = true
-                droppingPolyomino.direction = .left
-                moveHorizontally()
-                lastMoveTime = 0.0
-            }
-            else {
-                leftButtonDown = false
-                droppingPolyomino.direction = rightButtonDown ? .right : .none
-            }
-        }
-    }
-    
-    var rightButton: SKNode {
-        return childNode(withName: GameConstants.RightButtonKey)!
-    }
-    
-    var rightButtonDown = false
-    
-    var rightButtonTouches = Set<UITouch>() {
-        didSet {
-            if !rightButtonTouches.isEmpty {
-                rightButtonDown = true
-                droppingPolyomino.direction = .right
-                moveHorizontally()
-                lastMoveTime = 0.0
-            }
-            else {
-                rightButtonDown = false
-                droppingPolyomino.direction = leftButtonDown ? .left : .none
-            }
-        }
-    }
-    
-    
-    var downButton: SKNode {
-        return childNode(withName: GameConstants.DownButtonKey)!
-    }
-    
-    var downButtonTouches = Set<UITouch>() {
-        didSet {
-            if !downButtonTouches.isEmpty {
-                currentDropInterval = GameConstants.HurriedUpDropInterval
-            }
-            else {
-                currentDropInterval = GameConstants.DefaultDropInterval
-            }
-        }
-    }
-    
-    
-    var rotateButton: SKNode {
-        return childNode(withName: GameConstants.RotateButtonKey)!
-    }
-    
-    var rotateButtonTouches = Set<UITouch>() {
-        didSet {
-            if !rotateButtonTouches.isEmpty {
-                let translations = rotationTranslations
-                if canTurnClockwise(by: translations) {
-                    droppingPolyomino.turn(by: translations)
-                }
-            }
-            else {
-            }
-        }
-    }
     
     /// Last time the polyomino in the arena dropped.
     var lastDropTime: Double = 0.0
@@ -136,6 +60,7 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        initializeButtons()
         initializeTextures()
         initializePolyominoCreator()
         initializeBuckets()
@@ -146,51 +71,91 @@ class GameScene: SKScene {
         spawnPreparingPolyomino()
         updateDroppingPolyomino(currentTime)
     }
-
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let touchPoint = touch.location(in: self)
-            if leftButton.contains(touchPoint) {
-                leftButtonTouches.insert(touch)
-            }
-            else if rightButton.contains(touchPoint) {
-                rightButtonTouches.insert(touch)
-            }
-            else if downButton.contains(touchPoint) {
-                downButtonTouches.insert(touch)
-            }
-            else if rotateButton.contains(touchPoint) {
-                rotateButtonTouches.insert(touch)
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            if leftButtonTouches.contains(touch) {
-                _ = leftButtonTouches.remove(touch)
-            }
-            if rightButtonTouches.contains(touch) {
-                _ = rightButtonTouches.remove(touch)
-            }
-            if downButtonTouches.contains(touch) {
-                _ = downButtonTouches.remove(touch)
-            }
-            if rotateButtonTouches.contains(touch) {
-                _ = rotateButtonTouches.remove(touch)
-            }
-        }
-    }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
 }
 
+
+// MARK: - Buttons
+private extension GameScene {
+    
+    var leftButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.LeftButtonKey)! as! ButtonSpriteNode
+    }
+    
+    var rightButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.RightButtonKey)! as! ButtonSpriteNode
+    }
+    
+    var downButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.DownButtonKey)! as! ButtonSpriteNode
+    }
+    
+    var rotateButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.RotateButtonKey)! as! ButtonSpriteNode
+    }
+    
+    func initializeButtons() {
+        initializeLeftButton()
+        initializeRightButton()
+        initializeDownButton()
+        initializeRotateButton()
+    }
+    
+    func initializeLeftButton() {
+        leftButton.isUserInteractionEnabled = true
+        leftButton.touchDownHandler = {
+            [unowned self] in
+            self.droppingPolyomino.direction = .left
+            self.moveHorizontally()
+            self.lastMoveTime = 0.0
+        }
+        
+        leftButton.touchUpHandler = {
+            [unowned self] in
+            self.droppingPolyomino.direction = self.rightButton.buttonDown ? .right : .none
+        }
+    }
+    
+    func initializeRightButton() {
+        rightButton.isUserInteractionEnabled = true
+        rightButton.touchDownHandler = {
+            [unowned self] in
+            self.droppingPolyomino.direction = .right
+            self.moveHorizontally()
+            self.lastMoveTime = 0.0
+        }
+        rightButton.touchUpHandler = {
+            [unowned self] in
+            self.droppingPolyomino.direction = self.leftButton.buttonDown ? .left : .none
+        }
+    }
+    
+    func initializeDownButton() {
+        downButton.isUserInteractionEnabled = true
+        downButton.touchDownHandler = {
+            [unowned self] in
+            self.currentDropInterval = GameConstants.HurriedUpDropInterval
+        }
+        downButton.touchUpHandler = {
+            [unowned self] in
+            self.currentDropInterval = GameConstants.DefaultDropInterval
+        }
+    }
+    
+    func initializeRotateButton() {
+        rotateButton.isUserInteractionEnabled = true
+        rotateButton.touchDownHandler = {
+            [unowned self] in
+            if self.canTurnClockwise(by: self.rotationTranslations) {
+                self.droppingPolyomino.turn(by: self.rotationTranslations)
+            }
+        }
+    }
+}
+
+// MARK: - Helpers
 private extension GameScene {
 
     var hitSound: SKAction {
