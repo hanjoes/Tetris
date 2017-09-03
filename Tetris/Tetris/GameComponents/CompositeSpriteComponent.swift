@@ -19,9 +19,3 @@ class CompositeSpriteComponent: GKComponent {
     }
     
 }
-
-extension CompositeSpriteComponent: Movable {
-    func move(withTranslation translation: CGPoint) {
-        _ = spriteComponents.map { $0.move(withTranslation: translation) }
-    }
-}

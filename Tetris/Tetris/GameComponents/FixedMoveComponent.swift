@@ -13,9 +13,5 @@ class FixedMoveComponent: GKComponent {
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-    
-    func move(component: Movable, withTranslation translation: CGPoint) {
-        component.move(withTranslation: translation)
-    }
 }
 

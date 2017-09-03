@@ -13,9 +13,3 @@ class SpriteComponent: GKComponent {
         fatalError()
     }
 }
-
-extension SpriteComponent: Movable {
-    func move(withTranslation translation: CGPoint) {
-        sprite.position = sprite.position.translate(by: translation)
-    }
-}
