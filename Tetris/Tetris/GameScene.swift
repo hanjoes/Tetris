@@ -12,12 +12,16 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.TetrisArenaKey)!
     }
     
+    let entityManager = EntityManager()
+    
     var score: Int = 0 {
         didSet {
-            print("updating score")
             scoreLabel.text = "\(score)"
         }
     }
+    
+    // Update time
+    var lastUpdateTime: TimeInterval = 0
     
     /// The area where we spawn polyominoes.
     var spawnArea: SKNode {
@@ -31,25 +35,11 @@ class GameScene: SKScene {
     /// The buckets by row, containing stable nodes.
     var nodesBuckets = [[SKNode]]()
     
-    var currentDropInterval = GameConstants.DefaultDropInterval
-    
-    /// Last time the polyomino in the arena dropped.
-    var lastDropTime: Double = 0.0
-    
-    /// Last time the polyomino in the arena moved horizontally.
-    var lastMoveTime: Double = 0.0
-    
     /// There will be a preparing polyomino anytime when the game is in progress.
-    var preparingPolyomino: SKPolyomino! {
-        didSet {
-            if preparingPolyomino == nil {
-                spawnPreparingPolyomino()
-            }
-        }
-    }
+    var preparingPolyomino: PolyominoEntity?
     
     /// Similar to `preparingPolyomino` there will always be one dropping.
-    var droppingPolyomino: SKPolyomino!
+    weak var droppingPolyomino: PolyominoEntity?
     
     /// Creator that creates polyominoes in the game.
     var creator: PolyominoCreator!
@@ -59,23 +49,103 @@ class GameScene: SKScene {
         return arena.frame.width / GameConstants.HorizontalCellNum
     }
     
+}
+
+extension GameScene {
+    override func update(_ currentTime: TimeInterval) {
+        let deltaTime = currentTime - lastUpdateTime
+        lastUpdateTime = currentTime
+        entityManager.update(deltaTime: deltaTime)
+    }
+    
     override func didMove(to view: SKView) {
         initializeButtons()
         initializeTextures()
         initializePolyominoCreator()
         initializeBuckets()
         initializeScore()
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        spawnPreparingPolyomino()
-        updateDroppingPolyomino(currentTime)
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        spawnPolyominoEntity()
+        stagePolyomino()
+        spawnPolyominoEntity()
     }
 }
 
+// MARK: - FixedMoveComponentDelegate
+extension GameScene: FixedMoveComponentDelegate {
+    func didStablize() {
+        // FIXME: transfer sprite nodes into arena.
+        pour()
+        entityManager.remove(entity: droppingPolyomino!)
+        droppingPolyomino = nil
+        stagePolyomino()
+        spawnPolyominoEntity()
+        clearIfRowFull()
+        run(hitSound)
+    }
+    
+    func pour() {
+        guard let polyominoComponent = droppingPolyomino?.component(ofType: PolyominoComponent.self) else {
+            return
+        }
+        for spriteComponent in polyominoComponent.spriteComponents {
+            let rowIndex = Int((spriteComponent.sprite.frame.minY + arena.frame.height / 2) / scale)
+            nodesBuckets[rowIndex].append(spriteComponent.sprite)
+        }
+    }
+}
+
+// MARK: - Spawning & Staging
+private extension GameScene {
+    func spawnPolyominoEntity() {
+        guard preparingPolyomino == nil else {
+            return
+        }
+        
+        let prototype = creator.makeRandomPolyomino()
+        let polyominoComponent = PolyominoComponent(withTexture: nil, withScale: scale, withPrototype: prototype)
+        let rotationComponent = RotationComponent()
+        let moveComponent = FixedMoveComponent()
+        moveComponent.delegate = self
+
+        // FIXME: Really bad to depend on GameScene, refactor it into arena entity prob?
+        let collisionCheckingComponent = CollisionCheckingComponent(inFrame: arena.frame, inGameScene: self)
+        
+        let newPolyominoEntity = PolyominoEntity(withComponents: [polyominoComponent,
+                                                                  moveComponent,
+                                                                  collisionCheckingComponent,
+                                                                  rotationComponent])
+        preparingPolyomino = newPolyominoEntity
+        
+        polyominoComponent.reparent(toNewParent: spawnArea)
+        let midPointX = polyominoComponent.prototype.midPoint.x
+        let midPointY = polyominoComponent.prototype.midPoint.y
+        let midPoint = CGPoint(x: midPointX * scale, y: midPointY * scale)
+        polyominoComponent.position = polyominoComponent.position.translate(by: midPoint.translation(to: CGPoint.zero))
+    }
+    
+    func stagePolyomino() {
+        guard droppingPolyomino == nil, preparingPolyomino != nil else {
+            return
+        }
+        
+        droppingPolyomino = preparingPolyomino
+        entityManager.entities.insert(droppingPolyomino!)
+        preparingPolyomino = nil
+        
+        guard let polyominoComponent = droppingPolyomino?.component(ofType: PolyominoComponent.self) else {
+            return
+        }
+        
+        polyominoComponent.reparent(toNewParent: arena)
+        polyominoComponent.position = CGPoint.zero
+        guard let fixedMoveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+            return
+        }
+        
+        fixedMoveComponent.move(by: polyominoComponent.position.translation(to: CGPoint(x: -scale, y: arena.frame.height / 2)))
+    }
+}
 
 // MARK: - Buttons
 private extension GameScene {
@@ -105,42 +175,75 @@ private extension GameScene {
     
     func initializeLeftButton() {
         leftButton.isUserInteractionEnabled = true
+
+        
         leftButton.touchDownHandler = {
             [unowned self] in
-            self.droppingPolyomino.direction = .left
-            self.moveHorizontally()
-            self.lastMoveTime = 0.0
+            
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.direction = .left
+            moveComponent.moveHorizontally()
+            moveComponent.waitForMoveTime = 0.0
         }
         
         leftButton.touchUpHandler = {
             [unowned self] in
-            self.droppingPolyomino.direction = self.rightButton.buttonDown ? .right : .none
+            
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.direction = self.rightButton.buttonDown ? .right : .none
         }
     }
     
     func initializeRightButton() {
         rightButton.isUserInteractionEnabled = true
+        
         rightButton.touchDownHandler = {
             [unowned self] in
-            self.droppingPolyomino.direction = .right
-            self.moveHorizontally()
-            self.lastMoveTime = 0.0
+            
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.direction = .right
+            moveComponent.moveHorizontally()
+            moveComponent.waitForMoveTime = 0.0
         }
         rightButton.touchUpHandler = {
             [unowned self] in
-            self.droppingPolyomino.direction = self.leftButton.buttonDown ? .left : .none
+            
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.direction = self.leftButton.buttonDown ? .left : .none
         }
     }
     
     func initializeDownButton() {
         downButton.isUserInteractionEnabled = true
+
+        
         downButton.touchDownHandler = {
             [unowned self] in
-            self.currentDropInterval = GameConstants.HurriedUpDropInterval
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.currentDropInterval = GameConstants.HurriedUpDropInterval
         }
         downButton.touchUpHandler = {
             [unowned self] in
-            self.currentDropInterval = GameConstants.DefaultDropInterval
+            guard let moveComponent = self.droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
+                return
+            }
+            
+            moveComponent.currentDropInterval = GameConstants.DefaultDropInterval
         }
     }
     
@@ -148,8 +251,16 @@ private extension GameScene {
         rotateButton.isUserInteractionEnabled = true
         rotateButton.touchDownHandler = {
             [unowned self] in
-            if self.canTurnClockwise(by: self.rotationTranslations) {
-                self.droppingPolyomino.turn(by: self.rotationTranslations)
+            guard let rotationComponent = self.droppingPolyomino?.component(ofType: RotationComponent.self) else {
+                return
+            }
+            
+            guard let collider = self.droppingPolyomino?.component(ofType: CollisionCheckingComponent.self) else {
+                return
+            }
+            
+            if collider.canTurnClockwise() {
+                rotationComponent.turnClockwise()
             }
         }
     }
@@ -160,92 +271,6 @@ private extension GameScene {
 
     var hitSound: SKAction {
         return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
-    }
-
-    var canDrop: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: 0, y: -scale))
-            if nextPosition.y < -(arena.frame.height / 2) {
-                noHit = false
-            }
-            else {
-                if checkOverlap(forPosition: nextPosition) {
-                    noHit = false
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    var canMoveLeft: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: -scale, y: 0))
-            if nextPosition.x < -(arena.frame.width / 2) {
-                noHit = false
-            }
-            else {
-                if checkOverlap(forPosition: nextPosition) {
-                    noHit = false
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    var canMoveRight: Bool {
-        return droppingPolyomino.spriteNodes.filter {
-            var noHit = true
-            let nextPosition = $0.frame.origin.translate(by: CGPoint(x: scale, y: 0))
-            if nextPosition.x > (arena.frame.width / 2 - scale) {
-                noHit = false
-            }
-            else {
-                if checkOverlap(forPosition: nextPosition) {
-                    noHit = false
-                }
-            }
-            return noHit
-        }.count == droppingPolyomino.spriteNodes.count
-    }
-    
-    var rotationTranslations: [CGPoint] {
-        let anchorPoint = droppingPolyomino.anchorPoint
-//        print("anchor: \(anchorPoint) points: \(droppingPolyomino.spriteNodes.map { $0.frame.origin})")
-        let centeringTranslation = anchorPoint.translation(to: CGPoint.zero)
-        return droppingPolyomino.spriteNodes.map {
-            let x = $0.frame.minX
-            let y = $0.frame.minY
-            let bottomLeftCorner = CGPoint(x: x, y: y)
-            let translated = bottomLeftCorner.translate(by: centeringTranslation)
-            let rotated = CGPoint(x: translated.y, y: -translated.x)
-            let rotationTranslation = translated.translation(to: rotated)
-            return rotationTranslation
-        }
-    }
-    
-    func canTurnClockwise(by translations: [CGPoint]) -> Bool {
-        guard translations.count == droppingPolyomino.spriteNodes.count else {
-            return false
-        }
-        
-        for index in 0..<translations.count {
-            let node = droppingPolyomino.spriteNodes[index]
-            let translation = translations[index]
-            let nextPosition = node.frame.origin.translate(by: translation)
-            if nextPosition.x > (arena.frame.width / 2 - scale) ||
-                nextPosition.x < -(arena.frame.width / 2) ||
-                nextPosition.y < -(arena.frame.height / 2 - scale) {
-                return false
-            }
-            else {
-                if checkOverlap(forPosition: nextPosition) {
-                    return false
-                }
-            }
-        }
-        return true
     }
     
     func initializeScore() {
@@ -259,7 +284,7 @@ private extension GameScene {
     
     /// Initializes the creator for `Polyomino`.
     func initializePolyominoCreator() {
-        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity, withAtlas: blockTextureAtlas.first!)
+        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity)
     }
     
     func initializeTextures() {
@@ -270,71 +295,7 @@ private extension GameScene {
             SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
         ]
     }
-    
-    /// Spawn a preparing `Polyomino` at the spawning area.
-    func spawnPreparingPolyomino() {
-        guard preparingPolyomino == nil else {
-            return
-        }
-        
-        preparingPolyomino = creator.makeRandomPolyomino(withScale: scale)
-        let spawnArea = childNode(withName: GameConstants.SpawnAreaKey)!
-        preparingPolyomino.center(to: spawnArea)
-    }
-    
-    func moveHorizontally() {
-        switch droppingPolyomino.direction {
-        case .left:
-            if canMoveLeft {
-                droppingPolyomino.move(by: CGPoint(x: -scale, y: 0))
-            }
-        case .right:
-            if canMoveRight {
-                droppingPolyomino.move(by: CGPoint(x: scale, y: 0))
-            }
-        default:
-            break
-        }
-    }
-    
-    /// Update the dropping polyomino, this method will ensure we have a
-    /// polyomino in the arena and preparing polyomino will be updated after
-    /// we used the polyomino in spawning area.
-    /// - Parameter currentTime: time when update is called
-    func updateDroppingPolyomino(_ currentTime: TimeInterval) {
-        if droppingPolyomino == nil {
-            stagePolyomino()
-        }
-        
-        if currentTime - lastMoveTime >= GameConstants.HorizontalMovingInterval {
-            // don't move when we haven't moved, removing this line
-            // will cause double movement issue.
-            if lastMoveTime != 0.0 {
-                moveHorizontally()
-            }
-            lastMoveTime = currentTime
-        }
-        
-        if currentTime - lastDropTime >= currentDropInterval {
-            lastDropTime = currentTime
-            if canDrop {
-                droppingPolyomino.move(by: CGPoint(x: 0, y: -scale))
-            }
-            else {
-                pour(nodes: droppingPolyomino.spriteNodes)
-                clearIfRowFull()
-                stagePolyomino()
-                run(hitSound)
-            }
-        }
-    }
-    
-    func pour(nodes: [SKNode]) {
-        for node in nodes {
-            let rowIndex = Int((node.frame.minY + arena.frame.height / 2) / scale)
-            nodesBuckets[rowIndex].append(node)
-        }
-    }
+
     
     func clearIfRowFull() {
         let fullRowNum = Int(arena.frame.width / scale)
@@ -350,17 +311,7 @@ private extension GameScene {
         compressRows()
         updateScore(withRowsCleared: rowsCleared)
     }
-    
-    func checkOverlap(forPosition position: CGPoint) -> Bool {
-        for row in nodesBuckets {
-            for node in row {
-                if position == node.frame.origin {
-                    return true
-                }
-            }
-        }
-        return false
-    }
+
     
     func compressRows() {
         let numRows = Int(arena.frame.height / scale)
@@ -396,11 +347,5 @@ private extension GameScene {
             node.position = node.position.translate(by: CGPoint(x: 0, y: -scale * CGFloat(level)))
         }
     }
-    
-    func stagePolyomino() {
-        droppingPolyomino = preparingPolyomino
-        droppingPolyomino.move(to: arena)
-        droppingPolyomino.position = CGPoint(x: -scale, y: arena.frame.height / 2)
-        preparingPolyomino = nil
-    }
+   
 }

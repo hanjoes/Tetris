@@ -8,16 +8,6 @@ import SpriteKit
 /// and scale in our game scene.
 struct SKPolyomino {
     
-    /// Horizontal movement direction of this polyomino.
-    ///
-    /// - left: moving left
-    /// - right: moving right
-    /// - none: no horizontal movement
-    enum HorizontalDirection {
-        case left
-        case right
-        case none
-    }
 
     /// Child sprite nodes that this piece is composed of.
     var spriteNodes: [SKSpriteNode]

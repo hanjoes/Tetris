@@ -23,6 +23,7 @@
 		DB4558EE1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */; };
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
 		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
+		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
 		DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C821F397BB600DD4694 /* AppDelegate.swift */; };
 		DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C841F397BB600DD4694 /* GameScene.sks */; };
 		DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C861F397BB600DD4694 /* Actions.sks */; };
@@ -34,6 +35,8 @@
 		DB8B6CA91F397BB600DD4694 /* TetrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6CA81F397BB600DD4694 /* TetrisUITests.swift */; };
 		DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD490F1F57DAF000009DDA /* FixedMoveComponent.swift */; };
 		DBAD49151F57DFBF00009DDA /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */; };
+		DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */; };
+		DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8533E1F5CEEE100E02103 /* EntityManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,7 @@
 		DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreatorTests.swift; sourceTree = "<group>"; };
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
 		DB8B6C7F1F397BB600DD4694 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8B6C821F397BB600DD4694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB8B6C841F397BB600DD4694 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		DB8B6CAA1F397BB600DD4694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBAD490F1F57DAF000009DDA /* FixedMoveComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedMoveComponent.swift; sourceTree = "<group>"; };
 		DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoComponent.swift; sourceTree = "<group>"; };
+		DBC8533E1F5CEEE100E02103 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */,
+				DBC8533E1F5CEEE100E02103 /* EntityManager.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -169,12 +176,13 @@
 		DB653B3B1F48B30A004AA01E /* GameComponents */ = {
 			isa = PBXGroup;
 			children = (
-				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 				DB04E1BA1F3D663F00B60083 /* SKPolyomino.swift */,
 				DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */,
 				DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */,
 				DB19C3111F57D3F700B10C2F /* RotationComponent.swift */,
 				DBAD490F1F57DAF000009DDA /* FixedMoveComponent.swift */,
+				DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */,
+				DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */,
 			);
 			path = GameComponents;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 				DB21CAC11F513E3700EE73C0 /* Sounds */,
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
+				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
@@ -378,10 +387,13 @@
 				DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */,
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
+				DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
 				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,
 				DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */,
+				DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */,
 				DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */,
+				DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */,
 				DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */,
 				DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */,
 				DB04E1BB1F3D663F00B60083 /* SKPolyomino.swift in Sources */,
