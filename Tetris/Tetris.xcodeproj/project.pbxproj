@@ -26,6 +26,8 @@
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
 		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
 		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
+		DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */; };
+		DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */; };
 		DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C821F397BB600DD4694 /* AppDelegate.swift */; };
 		DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C841F397BB600DD4694 /* GameScene.sks */; };
 		DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C861F397BB600DD4694 /* Actions.sks */; };
@@ -79,6 +81,8 @@
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
+		DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaEntity.swift; sourceTree = "<group>"; };
+		DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaComponent.swift; sourceTree = "<group>"; };
 		DB8B6C7F1F397BB600DD4694 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8B6C821F397BB600DD4694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB8B6C841F397BB600DD4694 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				DBC8533E1F5CEEE100E02103 /* EntityManager.swift */,
 				DB3D806E1F5DF6D300890336 /* ArenaEntity.swift */,
 				DB3D80701F5DF73F00890336 /* TetrisEntity.swift */,
+				DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 				DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */,
 				DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */,
 				DB3D80741F5DF81000890336 /* ArenaComponent.swift */,
+				DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */,
 			);
 			path = GameComponents;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				DB8B6C891F397BB600DD4694 /* GameScene.swift in Sources */,
 				DBAD49151F57DFBF00009DDA /* SpriteComponent.swift in Sources */,
 				DB3D80711F5DF73F00890336 /* TetrisEntity.swift in Sources */,
+				DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */,
 				DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */,
 				DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */,
 				DB3D806F1F5DF6D300890336 /* ArenaEntity.swift in Sources */,
@@ -399,6 +406,7 @@
 				DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
 				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,
+				DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */,
 				DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */,
 				DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */,
 				DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */,

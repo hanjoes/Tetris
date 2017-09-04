@@ -9,6 +9,8 @@ class ArenaEntity: TetrisEntity {
         return component(ofType: ArenaComponent.self)!
     }
     
+    weak var droppingPolyomino: PolyominoEntity?
+    
     var scale: CGFloat {
         return arenaComponent.sprite.frame.width / GameConstants.HorizontalCellNum
     }

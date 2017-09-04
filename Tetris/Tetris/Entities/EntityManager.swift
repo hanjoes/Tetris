@@ -26,6 +26,10 @@ class EntityManager {
     var polyomino: PolyominoEntity? {
         return getEntity(contains: PolyominoComponent.self) as? PolyominoEntity
     }
+    
+    var spawnArea: SpawnAreaEntity {
+        return getEntity(contains: SpawnAreaComponent.self) as! SpawnAreaEntity
+    }
 }
 
 private extension EntityManager {
