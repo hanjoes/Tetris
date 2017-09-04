@@ -3,23 +3,21 @@ import SpriteKit
 
 class CollisionCheckingComponent: GKComponent {
     
-    var gameScene: GameScene
-    
-    var bbox: CGRect
-    
-    // TODO: Really bad to depend on GameScene. refactor into arena entity probably.
-    init(inFrame frame: CGRect, inGameScene gameScene: GameScene) {
-        self.bbox = frame
-        self.gameScene = gameScene
-        super.init()
+    var bbox: CGRect {
+        return entityManager.arena.arenaComponent.sprite.frame
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    var entityManager: EntityManager {
+        let tetrisEntity = entity as! TetrisEntity
+        return tetrisEntity.entityManager
+    }
+    
+    var arena: ArenaEntity {
+        return entityManager.arena
     }
     
     func collide(with point: CGPoint) -> Bool {
-        for row in gameScene.nodesBuckets {
+        for row in arena.nodesBuckets {
             for node in row {
                 if node.frame.origin == point {
                     return true

@@ -1,16 +1,9 @@
 import SpriteKit
 import GameplayKit
 
-
-// TODO: - Switch to GameplayKit
 class GameScene: SKScene {
     
     var blockTextureAtlas = [SKTextureAtlas]()
-    
-    /// The arena where we actually play the game.
-    var arena: SKNode {
-        return childNode(withName: GameConstants.TetrisArenaKey)!
-    }
     
     let entityManager = EntityManager()
     
@@ -18,6 +11,17 @@ class GameScene: SKScene {
         didSet {
             scoreLabel.text = "\(score)"
         }
+    }
+    
+    var hitSound: SKAction {
+        return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
+    }
+    
+    func updateScore(withRowsCleared rowsCleared: Int) {
+        guard rowsCleared > 0 else {
+            return
+        }
+        score += rowsCleared
     }
     
     // Update time
@@ -32,9 +36,6 @@ class GameScene: SKScene {
         return childNode(withName: GameConstants.ScoreLabelKey) as! SKLabelNode
     }
     
-    /// The buckets by row, containing stable nodes.
-    var nodesBuckets = [[SKNode]]()
-    
     /// There will be a preparing polyomino anytime when the game is in progress.
     var preparingPolyomino: PolyominoEntity?
     
@@ -44,13 +45,9 @@ class GameScene: SKScene {
     /// Creator that creates polyominoes in the game.
     var creator: PolyominoCreator!
     
-    /// Scale of the cells used in the polyominoes in the arena.
-    var scale: CGFloat {
-        return arena.frame.width / GameConstants.HorizontalCellNum
-    }
-    
 }
 
+// MARK: - Lifecycle methods
 extension GameScene {
     override func update(_ currentTime: TimeInterval) {
         let deltaTime = currentTime - lastUpdateTime
@@ -59,10 +56,10 @@ extension GameScene {
     }
     
     override func didMove(to view: SKView) {
+        initializeArena()
         initializeButtons()
         initializeTextures()
         initializePolyominoCreator()
-        initializeBuckets()
         initializeScore()
         
         spawnPolyominoEntity()
@@ -75,23 +72,13 @@ extension GameScene {
 extension GameScene: FixedMoveComponentDelegate {
     func didStablize() {
         // FIXME: transfer sprite nodes into arena.
-        pour()
+        entityManager.polyomino?.pourIntoArena()
         entityManager.remove(entity: droppingPolyomino!)
         droppingPolyomino = nil
         stagePolyomino()
         spawnPolyominoEntity()
-        clearIfRowFull()
+        entityManager.arena.clearIfFull()
         run(hitSound)
-    }
-    
-    func pour() {
-        guard let polyominoComponent = droppingPolyomino?.component(ofType: PolyominoComponent.self) else {
-            return
-        }
-        for spriteComponent in polyominoComponent.spriteComponents {
-            let rowIndex = Int((spriteComponent.sprite.frame.minY + arena.frame.height / 2) / scale)
-            nodesBuckets[rowIndex].append(spriteComponent.sprite)
-        }
     }
 }
 
@@ -101,20 +88,20 @@ private extension GameScene {
         guard preparingPolyomino == nil else {
             return
         }
-        
+        let arena = entityManager.arena
+        let scale = arena.scale
         let prototype = creator.makeRandomPolyomino()
         let polyominoComponent = PolyominoComponent(withTexture: nil, withScale: scale, withPrototype: prototype)
         let rotationComponent = RotationComponent()
+        let collisionCheckingComponent = CollisionCheckingComponent()
         let moveComponent = FixedMoveComponent()
         moveComponent.delegate = self
-
-        // FIXME: Really bad to depend on GameScene, refactor it into arena entity prob?
-        let collisionCheckingComponent = CollisionCheckingComponent(inFrame: arena.frame, inGameScene: self)
         
         let newPolyominoEntity = PolyominoEntity(withComponents: [polyominoComponent,
                                                                   moveComponent,
                                                                   collisionCheckingComponent,
-                                                                  rotationComponent])
+                                                                  rotationComponent],
+                                                 withEntityManager: entityManager)
         preparingPolyomino = newPolyominoEntity
         
         polyominoComponent.reparent(toNewParent: spawnArea)
@@ -136,14 +123,53 @@ private extension GameScene {
         guard let polyominoComponent = droppingPolyomino?.component(ofType: PolyominoComponent.self) else {
             return
         }
-        
-        polyominoComponent.reparent(toNewParent: arena)
+        let arena = entityManager.arena
+        let scale = arena.scale
+        let arenaSprite = arena.arenaComponent.sprite
+        polyominoComponent.reparent(toNewParent: arenaSprite)
         polyominoComponent.position = CGPoint.zero
         guard let fixedMoveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
             return
         }
         
-        fixedMoveComponent.move(by: polyominoComponent.position.translation(to: CGPoint(x: -scale, y: arena.frame.height / 2)))
+        fixedMoveComponent.move(by: polyominoComponent.position.translation(to: CGPoint(x: -scale, y: arenaSprite.frame.height / 2)))
+    }
+}
+
+
+// MARK: - Initializations
+private extension GameScene {
+    func initializeArena() {
+        guard let arenaSprite = childNode(withName: GameConstants.TetrisArenaKey) as? SKSpriteNode else {
+            return
+        }
+        let arenaComponent = ArenaComponent(withSpriteNode: arenaSprite)
+        let arenaEntity = ArenaEntity(withComponents: [arenaComponent], withEntityManager: entityManager)
+        entityManager.add(entity: arenaEntity)
+    }
+    
+    func initializeButtons() {
+        initializeLeftButton()
+        initializeRightButton()
+        initializeDownButton()
+        initializeRotateButton()
+    }
+    
+    func initializeScore() {
+        score = 0
+    }
+    
+    func initializePolyominoCreator() {
+        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity)
+    }
+    
+    func initializeTextures() {
+        blockTextureAtlas = [
+            SKTextureAtlas(named: GameConstants.BlueBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.GreenBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.YellowBlockAtlasName),
+            SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
+        ]
     }
 }
 
@@ -164,13 +190,6 @@ private extension GameScene {
     
     var rotateButton: ButtonSpriteNode {
         return childNode(withName: GameConstants.RotateButtonKey)! as! ButtonSpriteNode
-    }
-    
-    func initializeButtons() {
-        initializeLeftButton()
-        initializeRightButton()
-        initializeDownButton()
-        initializeRotateButton()
     }
     
     func initializeLeftButton() {
@@ -264,88 +283,4 @@ private extension GameScene {
             }
         }
     }
-}
-
-// MARK: - Helpers
-private extension GameScene {
-
-    var hitSound: SKAction {
-        return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
-    }
-    
-    func initializeScore() {
-        score = 0
-    }
-    
-    func initializeBuckets() {
-        let numRow = Int(arena.frame.height / scale)
-        nodesBuckets = [[SKNode]](repeating: [SKNode](), count: numRow)
-    }
-    
-    /// Initializes the creator for `Polyomino`.
-    func initializePolyominoCreator() {
-        creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity)
-    }
-    
-    func initializeTextures() {
-        blockTextureAtlas = [
-            SKTextureAtlas(named: GameConstants.BlueBlockAtlasName),
-            SKTextureAtlas(named: GameConstants.GreenBlockAtlasName),
-            SKTextureAtlas(named: GameConstants.YellowBlockAtlasName),
-            SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
-        ]
-    }
-
-    
-    func clearIfRowFull() {
-        let fullRowNum = Int(arena.frame.width / scale)
-        var rowsCleared = 0
-        for rowIndex in 0..<nodesBuckets.count {
-            let row = nodesBuckets[rowIndex]
-            if row.count == fullRowNum {
-                _ = row.map { $0.removeFromParent() }
-                nodesBuckets[rowIndex].removeAll()
-                rowsCleared += 1
-            }
-        }
-        compressRows()
-        updateScore(withRowsCleared: rowsCleared)
-    }
-
-    
-    func compressRows() {
-        let numRows = Int(arena.frame.height / scale)
-        for rowIndex in 0..<numRows {
-            var currentRow = rowIndex
-            if nodesBuckets[currentRow].isEmpty {
-                while nodesBuckets[currentRow].isEmpty {
-                    currentRow += 1
-                    if currentRow == numRows {
-                        return
-                    }
-                }
-                descend(rowIndex: currentRow, by: currentRow - rowIndex)
-                nodesBuckets[rowIndex] = nodesBuckets[currentRow]
-                nodesBuckets[currentRow].removeAll()
-            }
-        }
-    }
-    
-    func updateScore(withRowsCleared rowsCleared: Int) {
-        guard rowsCleared > 0 else {
-            return
-        }
-        score += rowsCleared
-    }
-    
-    func descend(rowIndex index: Int, by level: Int) {
-        guard index >= 0 && index < nodesBuckets.count else {
-            return
-        }
-        let row = nodesBuckets[index]
-        for node in row {
-            node.position = node.position.translate(by: CGPoint(x: 0, y: -scale * CGFloat(level)))
-        }
-    }
-   
 }
