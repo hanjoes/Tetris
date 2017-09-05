@@ -116,8 +116,8 @@ private extension GameScene {
             }
             
             moveComponent.direction = .left
-            moveComponent.moveHorizontally()
             moveComponent.waitForMoveTime = 0.0
+            moveComponent.moveHorizontally()
         }
         
         leftButton.touchUpHandler = {
@@ -144,8 +144,8 @@ private extension GameScene {
             }
             
             moveComponent.direction = .right
-            moveComponent.moveHorizontally()
             moveComponent.waitForMoveTime = 0.0
+            moveComponent.moveHorizontally()
         }
         rightButton.touchUpHandler = {
             [unowned self] in

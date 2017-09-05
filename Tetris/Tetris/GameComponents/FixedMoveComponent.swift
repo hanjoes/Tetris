@@ -97,7 +97,7 @@ extension FixedMoveComponent {
         }
         
         waitForMoveTime += seconds
-        if waitForDropTime >= GameConstants.HorizontalMovingInterval {
+        if waitForMoveTime >= GameConstants.HorizontalMovingInterval {
             moveHorizontally()
             waitForMoveTime = waitForMoveTime.truncatingRemainder(dividingBy: GameConstants.HorizontalMovingInterval)
         }
