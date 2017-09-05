@@ -5,29 +5,11 @@ class GameScene: SKScene {
     
     let entityManager = EntityManager()
     
-    var score: Int = 0 {
-        didSet {
-            scoreLabel.text = "\(score)"
-        }
-    }
-    
     var hitSound: SKAction {
         return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
     }
     
-    func updateScore(withRowsCleared rowsCleared: Int) {
-        guard rowsCleared > 0 else {
-            return
-        }
-        score += rowsCleared
-    }
-    
-    // Update time
     var lastUpdateTime: TimeInterval = 0
-    
-    var scoreLabel: SKLabelNode {
-        return childNode(withName: GameConstants.ScoreLabelKey) as! SKLabelNode
-    }
 }
 
 // MARK: - Lifecycle methods
@@ -84,16 +66,22 @@ private extension GameScene {
         entityManager.add(entity: arenaEntity)
     }
     
+    func initializeScore() {
+        guard let scoreLabelNode = childNode(withName: GameConstants.ScoreLabelKey) as? SKLabelNode else {
+            return
+        }
+        let scoreComponent = LabelComponent(withLabelNode: scoreLabelNode)
+        let scoreEntity = ScoreEntity(withComponents: [scoreComponent], withEntityManager: entityManager)
+        entityManager.add(entity: scoreEntity)
+    }
+    
     func initializeButtons() {
         initializeLeftButton()
         initializeRightButton()
         initializeDownButton()
         initializeRotateButton()
     }
-    
-    func initializeScore() {
-        score = 0
-    }
+
 }
 
 // MARK: - Buttons

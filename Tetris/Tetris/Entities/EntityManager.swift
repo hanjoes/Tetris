@@ -30,6 +30,10 @@ class EntityManager {
     var spawnArea: SpawnAreaEntity {
         return getEntity(contains: SpawnAreaComponent.self) as! SpawnAreaEntity
     }
+    
+    var scoreLabel: ScoreEntity {
+        return getEntity(contains: LabelComponent.self) as! ScoreEntity
+    }
 }
 
 private extension EntityManager {
