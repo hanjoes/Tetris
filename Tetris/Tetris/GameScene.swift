@@ -5,9 +5,7 @@ class GameScene: SKScene {
     
     let entityManager = EntityManager()
     
-    var hitSound: SKAction {
-        return SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
-    }
+    var hitSound = SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
     
     var lastUpdateTime: TimeInterval = 0
 }
