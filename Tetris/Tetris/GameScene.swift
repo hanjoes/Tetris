@@ -30,7 +30,6 @@ extension GameScene {
     }
 }
 
-
 // MARK: - FixedMoveComponentDelegate
 extension GameScene: FixedMoveComponentDelegate {
     func didStablize() {
@@ -40,6 +39,15 @@ extension GameScene: FixedMoveComponentDelegate {
         entityManager.spawnArea.spawnPolyominoEntity(withDelegate: self)
         entityManager.arena.clearIfFull()
         run(hitSound)
+    }
+}
+
+extension GameScene: PolyominoEventDelegate {
+    func didOverflow() {
+        let transition = SKTransition.moveIn(with: .right, duration: 0.5)
+        let gameOverScene = SKScene(fileNamed: GameConstants.GameOverScene)!
+        gameOverScene.scaleMode = .aspectFit
+        self.view?.presentScene(gameOverScene, transition: transition)
     }
 }
 

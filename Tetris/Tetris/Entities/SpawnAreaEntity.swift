@@ -14,7 +14,7 @@ class SpawnAreaEntity: TetrisEntity {
     
     var preparingPolyomino: PolyominoEntity?
     
-    func spawnPolyominoEntity(withDelegate delegate: FixedMoveComponentDelegate) {
+    func spawnPolyominoEntity(withDelegate delegate: GameScene) {
         guard preparingPolyomino == nil else {
             return
         }
@@ -45,6 +45,7 @@ class SpawnAreaEntity: TetrisEntity {
                                                                   collisionCheckingComponent,
                                                                   rotationComponent],
                                                  withEntityManager: entityManager)
+        newPolyominoEntity.eventDelegate = delegate
         preparingPolyomino = newPolyominoEntity
         
         polyominoComponent.reparent(toNewParent: spawnAreaComponent.sprite)

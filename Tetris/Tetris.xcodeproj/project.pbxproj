@@ -27,6 +27,7 @@
 		DB5C77C11F5E67C500A05E04 /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */; };
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
 		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
+		DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB69871C1F61086E00F32069 /* GameOverScene.sks */; };
 		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
 		DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */; };
 		DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */; };
@@ -84,6 +85,7 @@
 		DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		DB69871C1F61086E00F32069 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
 		DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaEntity.swift; sourceTree = "<group>"; };
 		DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaComponent.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */,
 				DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */,
 				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
+				DB69871C1F61086E00F32069 /* GameOverScene.sks */,
 				DB8B6C861F397BB600DD4694 /* Actions.sks */,
 				DB8B6C8C1F397BB600DD4694 /* Main.storyboard */,
 				DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */,
@@ -374,6 +377,7 @@
 				DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */,
 				DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */,
 				DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */,
+				DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */,
 				DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
