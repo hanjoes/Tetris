@@ -44,9 +44,12 @@ extension GameScene: FixedMoveComponentDelegate {
 
 extension GameScene: PolyominoEventDelegate {
     func didOverflow() {
-        let transition = SKTransition.moveIn(with: .right, duration: 0.5)
-        let gameOverScene = SKScene(fileNamed: GameConstants.GameOverScene)!
+        guard let gameOverScene = SKScene(fileNamed: GameConstants.GameOverScene) as? GameOverScene else {
+            return
+        }
+        gameOverScene.score = entityManager.scoreLabel.score
         gameOverScene.scaleMode = .aspectFit
+        let transition = SKTransition.moveIn(with: .right, duration: 0.5)
         self.view?.presentScene(gameOverScene, transition: transition)
     }
 }

@@ -28,6 +28,7 @@
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
 		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
 		DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB69871C1F61086E00F32069 /* GameOverScene.sks */; };
+		DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6987311F63BF6900F32069 /* GameOverScene.swift */; };
 		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
 		DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */; };
 		DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */; };
@@ -86,6 +87,7 @@
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		DB69871C1F61086E00F32069 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		DB6987311F63BF6900F32069 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
 		DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaEntity.swift; sourceTree = "<group>"; };
 		DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaComponent.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
 				DB653B301F4118BC004AA01E /* GameConstants.swift */,
+				DB6987311F63BF6900F32069 /* GameOverScene.swift */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
@@ -413,6 +416,7 @@
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
 				DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */,
+				DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */,
 				DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
 				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,

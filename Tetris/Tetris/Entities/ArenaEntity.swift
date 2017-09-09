@@ -36,7 +36,7 @@ class ArenaEntity: TetrisEntity {
             }
         }
         compressRows()
-//        updateScore(withRowsCleared: rowsCleared)
+        entityManager.scoreLabel.score += rowsCleared
     }
     
     func compressRows() {
