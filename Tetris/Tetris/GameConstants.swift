@@ -15,6 +15,7 @@ struct GameConstants {
     static let RotateButtonKey = "RotateButton"
     static let ScoreLabelKey = "ScoreLabel"
     static let GameOverScene = "GameOverScene"
+    static let GameStartScene = "GameStartScene"
     static let EndgameScoreLabelKey = "EndgameScoreLabel"
     
     /// Interval for a piece to drop by one cell in second.

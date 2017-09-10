@@ -29,6 +29,7 @@
 		DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B301F4118BC004AA01E /* GameConstants.swift */; };
 		DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB69871C1F61086E00F32069 /* GameOverScene.sks */; };
 		DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6987311F63BF6900F32069 /* GameOverScene.swift */; };
+		DB6987361F6516BE00F32069 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB6987351F65145000F32069 /* GameStartScene.sks */; };
 		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
 		DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */; };
 		DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */; };
@@ -88,6 +89,7 @@
 		DB653B301F4118BC004AA01E /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		DB69871C1F61086E00F32069 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		DB6987311F63BF6900F32069 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		DB6987351F65145000F32069 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
 		DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaEntity.swift; sourceTree = "<group>"; };
 		DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaComponent.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */,
 				DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */,
 				DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */,
+				DB6987351F65145000F32069 /* GameStartScene.sks */,
 				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
 				DB69871C1F61086E00F32069 /* GameOverScene.sks */,
 				DB8B6C861F397BB600DD4694 /* Actions.sks */,
@@ -375,6 +378,7 @@
 				DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */,
 				DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */,
 				DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */,
+				DB6987361F6516BE00F32069 /* GameStartScene.sks in Resources */,
 				DB21CAD51F538DA200EE73C0 /* PinkBlocks.atlas in Resources */,
 				DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */,
 				DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */,
