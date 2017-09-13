@@ -46,6 +46,7 @@
 		DBAD49151F57DFBF00009DDA /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */; };
 		DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */; };
 		DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8533E1F5CEEE100E02103 /* EntityManager.swift */; };
+		DBE3163D1F68F2A500284AF8 /* GameStartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		DBC8533C1F5CCEF500E02103 /* PolyominoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoComponent.swift; sourceTree = "<group>"; };
 		DBC8533E1F5CEEE100E02103 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 				DB653B301F4118BC004AA01E /* GameConstants.swift */,
 				DB6987311F63BF6900F32069 /* GameOverScene.swift */,
 				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
+				DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
 			);
@@ -420,6 +423,7 @@
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
 				DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */,
+				DBE3163D1F68F2A500284AF8 /* GameStartScene.swift in Sources */,
 				DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */,
 				DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
