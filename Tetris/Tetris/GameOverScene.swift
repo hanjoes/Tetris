@@ -10,6 +10,27 @@ class GameOverScene: SKScene {
 extension GameOverScene {
     override func didMove(to view: SKView) {
         initializeGameOverScore()
+        initializeRestartButton()
+    }
+}
+
+// MARK: - Buttons
+extension GameOverScene {
+    
+    var restartButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.RestartButton)! as! ButtonSpriteNode
+    }
+    
+    func initializeRestartButton() {
+        restartButton.isUserInteractionEnabled = true
+        
+        restartButton.touchUpHandler = {
+            [unowned self] in
+            let gameScene = SKScene(fileNamed: GameConstants.GameScene)!
+            gameScene.scaleMode = .aspectFit
+            let transition = SKTransition.doorway(withDuration: 0.5)
+            self.view?.presentScene(gameScene, transition: transition)
+        }
     }
 }
 

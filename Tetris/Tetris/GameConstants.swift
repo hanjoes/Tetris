@@ -12,6 +12,7 @@ struct GameConstants {
     static let LeftButtonKey = "LeftButton"
     static let RightButtonKey = "RightButton"
     static let GameStartButtonKey = "GameStartButton"
+    static let RestartButton = "RestartButton"
     static let DownButtonKey = "DownButton"
     static let RotateButtonKey = "RotateButton"
     static let ScoreLabelKey = "ScoreLabel"
