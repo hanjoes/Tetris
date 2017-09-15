@@ -26,7 +26,7 @@ private extension GameStartScene {
             [unowned self] in
             let gameScene = SKScene(fileNamed: GameConstants.GameScene)!
             gameScene.scaleMode = .aspectFit
-            let transition = SKTransition.doorway(withDuration: 0.5)
+            let transition = SKTransition.fade(withDuration: 0.3)
             self.view?.presentScene(gameScene, transition: transition)
         }
     }
