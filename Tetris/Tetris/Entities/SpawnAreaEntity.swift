@@ -29,8 +29,8 @@ class SpawnAreaEntity: TetrisEntity {
         
         let randomIndex = Int(arc4random() % UInt32(prototypes.count))
         let chosenPrototype = prototypes[randomIndex]
-        // TODO: choose atlas based on level.
-        let chosenAtlas = blockTextureAtlas[0]
+        let currentLevel = entityManager.arena.currentLevel
+        let chosenAtlas = blockTextureAtlas[currentLevel % blockTextureAtlas.count]
         let chosenTextureName = chosenAtlas.textureNames[randomIndex % chosenAtlas.textureNames.count]
         let chosenTexture = chosenAtlas.textureNamed(chosenTextureName)
         

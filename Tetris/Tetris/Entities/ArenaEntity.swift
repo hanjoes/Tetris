@@ -5,8 +5,20 @@ class ArenaEntity: TetrisEntity {
     /// The buckets by row, containing stable nodes.
     var nodesBuckets = [[SKNode]]()
     
+    var currentLevel = 0 {
+        didSet {
+            currentDropInterval = max(Double(currentDropInterval) - Double(currentLevel) / 10, GameConstants.MinimumDropInterval)
+        }
+    }
+    
+    var currentDropInterval = GameConstants.DefaultDropInterval
+    
     var arenaComponent: ArenaComponent {
         return component(ofType: ArenaComponent.self)!
+    }
+    
+    var ruleComponent: RuleComponent {
+        return component(ofType: RuleComponent.self)!
     }
     
     weak var droppingPolyomino: PolyominoEntity?
@@ -37,6 +49,16 @@ class ArenaEntity: TetrisEntity {
         }
         compressRows()
         entityManager.scoreLabel.score += rowsCleared
+        
+        if rowsCleared > 0 {
+            ruleComponent.ruleSystem.state[GameConstants.CurrentScoreKey] = entityManager.scoreLabel.score
+
+            ruleComponent.ruleSystem.reset()
+            ruleComponent.ruleSystem.evaluate()
+            if ruleComponent.ruleSystem.grade(forFact: GameConstants.ProceedToNextLevelFact as NSObjectProtocol) > 0 {
+                currentLevel += 1
+            }
+        }
     }
     
     func compressRows() {

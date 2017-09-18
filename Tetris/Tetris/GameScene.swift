@@ -71,7 +71,17 @@ private extension GameScene {
             return
         }
         let arenaComponent = ArenaComponent(withSpriteNode: arenaSprite)
-        let arenaEntity = ArenaEntity(withComponents: [arenaComponent], withEntityManager: entityManager)
+        let rules = [
+            GKRule(predicate: NSPredicate {
+                (obj, _) in
+                guard let score = (obj as! GKRuleSystem).state[GameConstants.CurrentScoreKey] as? Int else {
+                    return false
+                }
+                return score % GameConstants.NumScoreBeforeProceeding == 0
+            }, assertingFact: GameConstants.ProceedToNextLevelFact as NSObjectProtocol, grade: 1.0)
+        ]
+        let ruleComponent = RuleComponent(withRules: rules)
+        let arenaEntity = ArenaEntity(withComponents: [arenaComponent, ruleComponent], withEntityManager: entityManager)
         entityManager.add(entity: arenaEntity)
     }
     
@@ -190,7 +200,7 @@ private extension GameScene {
                 return
             }
             
-            moveComponent.currentDropInterval = GameConstants.DefaultDropInterval
+            moveComponent.currentDropInterval = self.entityManager.arena.currentDropInterval
         }
     }
     

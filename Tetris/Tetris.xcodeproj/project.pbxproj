@@ -18,6 +18,7 @@
 		DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */; };
 		DB3408E91F3ADDD5000A1F5F /* PolyominoCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */; };
 		DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */; };
+		DB34BC011F6F687B00995392 /* RuleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34BC001F6F687B00995392 /* RuleComponent.swift */; };
 		DB3D806F1F5DF6D300890336 /* ArenaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D806E1F5DF6D300890336 /* ArenaEntity.swift */; };
 		DB3D80711F5DF73F00890336 /* TetrisEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D80701F5DF73F00890336 /* TetrisEntity.swift */; };
 		DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D80741F5DF81000890336 /* ArenaComponent.swift */; };
@@ -79,6 +80,7 @@
 		DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BlueBlocks.atlas; sourceTree = "<group>"; };
 		DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreator.swift; sourceTree = "<group>"; };
 		DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyomino.swift; sourceTree = "<group>"; };
+		DB34BC001F6F687B00995392 /* RuleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleComponent.swift; sourceTree = "<group>"; };
 		DB3D806E1F5DF6D300890336 /* ArenaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaEntity.swift; sourceTree = "<group>"; };
 		DB3D80701F5DF73F00890336 /* TetrisEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEntity.swift; sourceTree = "<group>"; };
 		DB3D80741F5DF81000890336 /* ArenaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaComponent.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				DB3D80741F5DF81000890336 /* ArenaComponent.swift */,
 				DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */,
 				DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */,
+				DB34BC001F6F687B00995392 /* RuleComponent.swift */,
 			);
 			path = GameComponents;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				DB3D80711F5DF73F00890336 /* TetrisEntity.swift in Sources */,
 				DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */,
 				DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */,
+				DB34BC011F6F687B00995392 /* RuleComponent.swift in Sources */,
 				DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */,
 				DB3D806F1F5DF6D300890336 /* ArenaEntity.swift in Sources */,
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,

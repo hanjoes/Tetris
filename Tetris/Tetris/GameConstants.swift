@@ -4,6 +4,8 @@ struct GameConstants {
     static let HorizontalCellNum: CGFloat = 10
     static let VerticalCellNum: CGFloat = 20
     
+    static let DefaultDropInterval = 0.8
+    static let MinimumDropInterval = 0.1
     static let HorizontalMovingInterval = 0.2
     static let HurriedUpDropInterval = 0.05
     
@@ -22,7 +24,6 @@ struct GameConstants {
     static let EndgameScoreLabelKey = "EndgameScoreLabel"
     
     /// Interval for a piece to drop by one cell in second.
-    static let DefaultDropInterval = 0.3
     static let DefaultComplexity = 4
     
     static let HitSoundFileName = "hollow_thud.mp3"
@@ -31,4 +32,9 @@ struct GameConstants {
     static let GreenBlockAtlasName = "GreenBlocks"
     static let YellowBlockAtlasName = "YellowBlocks"
     static let PinkBlockAtlasName = "PinkBlocks"
+    
+    /// Rules
+    static let CurrentScoreKey = "CurrentScore"
+    static let ProceedToNextLevelFact = "ProceedToNextLevel"
+    static let NumScoreBeforeProceeding = 25
 }

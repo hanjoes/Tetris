@@ -7,7 +7,6 @@ class GameStartScene: SKScene {
 // MARK: - Lifecycles
 extension GameStartScene {
     override func didMove(to view: SKView) {
-        print("inside")
         initializeStartButton()
     }
 }
