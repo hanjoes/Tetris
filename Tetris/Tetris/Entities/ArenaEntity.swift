@@ -5,13 +5,11 @@ class ArenaEntity: TetrisEntity {
     /// The buckets by row, containing stable nodes.
     var nodesBuckets = [[SKNode]]()
     
-    var currentLevel = 0 {
-        didSet {
-            currentDropInterval = max(Double(currentDropInterval) - Double(currentLevel) / 10, GameConstants.MinimumDropInterval)
-        }
-    }
+    var currentLevel = 0
     
-    var currentDropInterval = GameConstants.DefaultDropInterval
+    var currentDropInterval: Double {
+        return max(GameConstants.DefaultDropInterval - Double(currentLevel) / 10, GameConstants.MinimumDropInterval)
+    }
     
     var arenaComponent: ArenaComponent {
         return component(ofType: ArenaComponent.self)!
