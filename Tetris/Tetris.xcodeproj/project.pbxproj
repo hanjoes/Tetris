@@ -144,6 +144,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB04A9FB1F70E585007A03F3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DB6987311F63BF6900F32069 /* GameOverScene.swift */,
+				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
+				DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		DB19C3051F5533B300B10C2F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,10 +258,8 @@
 				DB19C3081F57D09E00B10C2F /* Entities */,
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
+				DB04A9FB1F70E585007A03F3 /* Scenes */,
 				DB653B301F4118BC004AA01E /* GameConstants.swift */,
-				DB6987311F63BF6900F32069 /* GameOverScene.swift */,
-				DB8B6C881F397BB600DD4694 /* GameScene.swift */,
-				DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */,
 				DB8B6C821F397BB600DD4694 /* AppDelegate.swift */,
 				DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */,
 			);
