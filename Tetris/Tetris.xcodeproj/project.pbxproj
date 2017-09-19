@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACE1F53891E00EE73C0 /* Assets.xcassets */; };
 		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
 		DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */; };
 		DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */; };
@@ -391,6 +392,7 @@
 				DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */,
 				DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */,
 				DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */,
+				DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */,
 				DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
