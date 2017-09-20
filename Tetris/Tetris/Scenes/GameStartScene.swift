@@ -1,13 +1,17 @@
 import SpriteKit
+import AVFoundation
 
 class GameStartScene: SKScene {
-    
+    var audioNode: SKAudioNode {
+        return childNode(withName: "background_music") as! SKAudioNode
+    }
 }
 
 // MARK: - Lifecycles
 extension GameStartScene {
     override func didMove(to view: SKView) {
         initializeStartButton()
+        playBackgroundMusic()
     }
 }
 
@@ -33,5 +37,12 @@ private extension GameStartScene {
         let fadeOut = SKAction.fadeOut(withDuration: 0.8)
         let flash = SKAction.sequence([fadeOut, fadeIn])
         gameStartButton.run(SKAction.repeatForever(flash))
+    }
+}
+
+// MARK: - Audio
+private extension GameStartScene {
+    func playBackgroundMusic() {
+        audioNode.run(SKAction.play())
     }
 }
