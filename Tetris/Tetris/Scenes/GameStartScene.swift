@@ -3,7 +3,7 @@ import AVFoundation
 
 class GameStartScene: SKScene {
     var audioNode: SKAudioNode {
-        return childNode(withName: "background_music") as! SKAudioNode
+        return childNode(withName: GameConstants.GameStartSceneMusic) as! SKAudioNode
     }
 }
 

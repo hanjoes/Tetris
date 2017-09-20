@@ -7,6 +7,10 @@ class GameScene: SKScene {
     
     var hitSound = SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
     
+    var audioNode: SKAudioNode {
+        return childNode(withName: GameConstants.GameStartSceneMusic) as! SKAudioNode
+    }
+    
     var lastUpdateTime: TimeInterval = 0
 }
 
@@ -56,6 +60,12 @@ extension GameScene: PolyominoEventDelegate {
 
 // MARK: - Initializations
 private extension GameScene {
+    
+    func playBackgroundMusic() {
+        audioNode.run(SKAction.play())
+    }
+    
+    
     func initializeSpawnArea() {
         guard let spawnAreaSprite = childNode(withName: GameConstants.SpawnAreaKey) as? SKSpriteNode else {
             return
