@@ -38,5 +38,5 @@ struct GameConstants {
     /// Rules
     static let CurrentScoreKey = "CurrentScore"
     static let ProceedToNextLevelFact = "ProceedToNextLevel"
-    static let NumScoreBeforeProceeding = 25
+    static let NumScoreBeforeProceeding = 20
 }
