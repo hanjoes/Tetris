@@ -5,3 +5,5 @@ Classic Tetris on iOS. The game is developed based on my early years of playing 
 The project is open source, and is not meant to be put on App Store, so far as I know, individual developers are not allowed to do that with out right permissions from the "Tetris company". 
 
 The motivation of this project is mainly to get my feet wet with SpriteKit and GameplayKit.
+
+<img src="screenshot.png" width="300">
