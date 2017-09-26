@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACE1F53891E00EE73C0 /* Assets.xcassets */; };
+		DB15A6D71F78CB1F008737DD /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D61F78CB1F008737DD /* Tetris.swift */; };
 		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
 		DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */; };
 		DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */; };
@@ -24,7 +25,6 @@
 		DB3D80711F5DF73F00890336 /* TetrisEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D80701F5DF73F00890336 /* TetrisEntity.swift */; };
 		DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3D80741F5DF81000890336 /* ArenaComponent.swift */; };
 		DB4558EC1F3F805C002BD1AA /* CGPointExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */; };
-		DB4558EE1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */; };
 		DB55B7261F70EA730022C2D2 /* tetris_start_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */; };
 		DB55B7291F723CA20022C2D2 /* game_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB55B7281F723BA20022C2D2 /* game_music.mp3 */; };
 		DB5C77BF1F5E674100A05E04 /* ScoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */; };
@@ -44,7 +44,6 @@
 		DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C8A1F397BB600DD4694 /* GameViewController.swift */; };
 		DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C8C1F397BB600DD4694 /* Main.storyboard */; };
 		DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */; };
-		DB8B6C9E1F397BB600DD4694 /* PolyominoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C9D1F397BB600DD4694 /* PolyominoTests.swift */; };
 		DB8B6CA91F397BB600DD4694 /* TetrisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6CA81F397BB600DD4694 /* TetrisUITests.swift */; };
 		DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD490F1F57DAF000009DDA /* FixedMoveComponent.swift */; };
 		DBAD49151F57DFBF00009DDA /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAD49141F57DFBF00009DDA /* SpriteComponent.swift */; };
@@ -72,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetris_start_music.mp3; sourceTree = "<group>"; };
+		DB15A6D61F78CB1F008737DD /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
 		DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSpriteNode.swift; sourceTree = "<group>"; };
 		DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoEntity.swift; sourceTree = "<group>"; };
 		DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSpriteComponent.swift; sourceTree = "<group>"; };
@@ -89,7 +89,6 @@
 		DB3D80701F5DF73F00890336 /* TetrisEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEntity.swift; sourceTree = "<group>"; };
 		DB3D80741F5DF81000890336 /* ArenaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaComponent.swift; sourceTree = "<group>"; };
 		DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionTests.swift; sourceTree = "<group>"; };
-		DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreatorTests.swift; sourceTree = "<group>"; };
 		DB55B7281F723BA20022C2D2 /* game_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_music.mp3; sourceTree = "<group>"; };
 		DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEntity.swift; sourceTree = "<group>"; };
 		DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
@@ -111,7 +110,6 @@
 		DB8B6C921F397BB600DD4694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB8B6C941F397BB600DD4694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB8B6C991F397BB600DD4694 /* TetrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TetrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB8B6C9D1F397BB600DD4694 /* PolyominoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoTests.swift; sourceTree = "<group>"; };
 		DB8B6C9F1F397BB600DD4694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB8B6CA41F397BB600DD4694 /* TetrisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TetrisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8B6CA81F397BB600DD4694 /* TetrisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisUITests.swift; sourceTree = "<group>"; };
@@ -192,9 +190,10 @@
 		DB653B371F48B14D004AA01E /* Polyomino */ = {
 			isa = PBXGroup;
 			children = (
-				DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */,
-				DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */,
 				DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */,
+				DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */,
+				DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */,
+				DB15A6D61F78CB1F008737DD /* Tetris.swift */,
 			);
 			path = Polyomino;
 			sourceTree = "<group>";
@@ -275,9 +274,7 @@
 		DB8B6C9C1F397BB600DD4694 /* TetrisTests */ = {
 			isa = PBXGroup;
 			children = (
-				DB8B6C9D1F397BB600DD4694 /* PolyominoTests.swift */,
 				DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */,
-				DB4558ED1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift */,
 				DB8B6C9F1F397BB600DD4694 /* Info.plist */,
 			);
 			path = TetrisTests;
@@ -436,6 +433,7 @@
 			files = (
 				DB8B6C891F397BB600DD4694 /* GameScene.swift in Sources */,
 				DBAD49151F57DFBF00009DDA /* SpriteComponent.swift in Sources */,
+				DB15A6D71F78CB1F008737DD /* Tetris.swift in Sources */,
 				DB3D80711F5DF73F00890336 /* TetrisEntity.swift in Sources */,
 				DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */,
 				DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */,
@@ -468,8 +466,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB4558EC1F3F805C002BD1AA /* CGPointExtensionTests.swift in Sources */,
-				DB8B6C9E1F397BB600DD4694 /* PolyominoTests.swift in Sources */,
-				DB4558EE1F3FCDAF002BD1AA /* PolyominoCreatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

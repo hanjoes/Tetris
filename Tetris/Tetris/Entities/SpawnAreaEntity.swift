@@ -10,7 +10,7 @@ class SpawnAreaEntity: TetrisEntity {
         SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
     ]
     
-    let creator = PolyominoCreator(forCellNum: GameConstants.DefaultComplexity)
+    let creator = PolyominoCreator<Tetris>()
     
     var preparingPolyomino: PolyominoEntity?
     
@@ -25,7 +25,7 @@ class SpawnAreaEntity: TetrisEntity {
         
         let arena = entityManager.arena
         let scale = arena.scale
-        let prototypes = creator.possiblePolyominoes
+        let prototypes = creator.allPossible
         
         let randomIndex = Int(arc4random() % UInt32(prototypes.count))
         let chosenPrototype = prototypes[randomIndex]
@@ -49,8 +49,8 @@ class SpawnAreaEntity: TetrisEntity {
         preparingPolyomino = newPolyominoEntity
         
         polyominoComponent.reparent(toNewParent: spawnAreaComponent.sprite)
-        let midPointX = polyominoComponent.prototype.midPoint.x
-        let midPointY = polyominoComponent.prototype.midPoint.y
+        let midPointX = polyominoComponent.prototype.anchorPoint.x
+        let midPointY = polyominoComponent.prototype.anchorPoint.y
         let midPoint = CGPoint(x: midPointX * scale, y: midPointY * scale)
         polyominoComponent.position = polyominoComponent.position.translate(by: midPoint.translation(to: CGPoint.zero))
     }

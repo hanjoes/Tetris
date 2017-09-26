@@ -15,9 +15,9 @@ class PolyominoComponent: CompositeSpriteComponent {
     
     /// The point around which we rotate.
     var anchorPoint: CGPoint {
-        let prototypeMidPointX = prototype.midPoint.x
-        let prototypeMidPointY = prototype.midPoint.y
-        var initialMidPoint = CGPoint(x: prototypeMidPointX * scale, y: prototypeMidPointY * scale)
+        let protoAnchorPointX = prototype.anchorPoint.x
+        let protoAnchorPointY = prototype.anchorPoint.y
+        var initialMidPoint = CGPoint(x: protoAnchorPointX * scale, y: protoAnchorPointY * scale)
 
         /// The anchor point could be moved because dropping and horizontal movement.
         if let fixedMoveComponent = entity?.component(ofType: FixedMoveComponent.self) {
