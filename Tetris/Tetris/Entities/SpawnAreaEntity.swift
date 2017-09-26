@@ -49,8 +49,8 @@ class SpawnAreaEntity: TetrisEntity {
         preparingPolyomino = newPolyominoEntity
         
         polyominoComponent.reparent(toNewParent: spawnAreaComponent.sprite)
-        let midPointX = polyominoComponent.prototype.anchorPoint.x
-        let midPointY = polyominoComponent.prototype.anchorPoint.y
+        let midPointX = polyominoComponent.prototype.centerPoint.x
+        let midPointY = polyominoComponent.prototype.centerPoint.y
         let midPoint = CGPoint(x: midPointX * scale, y: midPointY * scale)
         polyominoComponent.position = polyominoComponent.position.translate(by: midPoint.translation(to: CGPoint.zero))
     }

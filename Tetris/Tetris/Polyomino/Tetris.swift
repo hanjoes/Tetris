@@ -19,6 +19,10 @@ struct Tetris: Polyomino {
     
     var anchorPoint: CGPoint
     
+    var centerPoint: CGPoint {
+        return anchorPoint.translate(by: CGPoint(x: 0.5, y: 0.5))
+    }
+    
     var cellNum: Int {
         return 4
     }

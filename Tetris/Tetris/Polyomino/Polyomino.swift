@@ -18,4 +18,7 @@ protocol Polyomino {
     
     /// Anchor point mainly used for rotation.
     var anchorPoint: CGPoint { get }
+    
+    /// Center point for display.
+    var centerPoint: CGPoint { get }
 }
