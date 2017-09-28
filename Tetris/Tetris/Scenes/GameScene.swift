@@ -81,6 +81,9 @@ private extension GameScene {
             return
         }
         let arenaComponent = ArenaComponent(withSpriteNode: arenaSprite)
+        let cropComponent = CroppingComponent()
+        cropComponent.add(maskNode: SKSpriteNode(imageNamed: GameConstants.ArenaMaskImageName))
+        arenaSprite.addChild(cropComponent.cropNode)
         let rules = [
             GKRule(predicate: NSPredicate {
                 (obj, _) in
@@ -91,7 +94,9 @@ private extension GameScene {
             }, assertingFact: GameConstants.ProceedToNextLevelFact as NSObjectProtocol, grade: 1.0)
         ]
         let ruleComponent = RuleComponent(withRules: rules)
-        let arenaEntity = ArenaEntity(withComponents: [arenaComponent, ruleComponent], withEntityManager: entityManager)
+        let arenaEntity = ArenaEntity(withComponents: [arenaComponent,
+                                                       ruleComponent,
+                                                       cropComponent], withEntityManager: entityManager)
         entityManager.add(entity: arenaEntity)
     }
     

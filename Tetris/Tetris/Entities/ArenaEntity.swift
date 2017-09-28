@@ -11,6 +11,10 @@ class ArenaEntity: TetrisEntity {
         return max(GameConstants.DefaultDropInterval - Double(currentLevel) / 10, GameConstants.MinimumDropInterval)
     }
     
+    var croppingComponent: CroppingComponent {
+        return component(ofType: CroppingComponent.self)!
+    }
+    
     var arenaComponent: ArenaComponent {
         return component(ofType: ArenaComponent.self)!
     }

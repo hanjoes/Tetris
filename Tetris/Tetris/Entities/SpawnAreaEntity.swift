@@ -74,14 +74,14 @@ class SpawnAreaEntity: TetrisEntity {
         }
         let arena = entityManager.arena
         let scale = arena.scale
-        let arenaSprite = arena.arenaComponent.sprite
-        polyominoComponent.reparent(toNewParent: arenaSprite)
+        let cropNode = arena.croppingComponent.cropNode
+        polyominoComponent.reparent(toNewParent: cropNode)
         polyominoComponent.position = CGPoint.zero
         guard let fixedMoveComponent = droppingPolyomino.component(ofType: FixedMoveComponent.self) else {
             return
         }
-        
-        fixedMoveComponent.move(by: polyominoComponent.position.translation(to: CGPoint(x: -scale, y: arenaSprite.frame.height / 2)))
+        let arenaNode = arena.arenaComponent.sprite
+        fixedMoveComponent.move(by: polyominoComponent.position.translation(to: CGPoint(x: -scale, y: arenaNode.frame.height / 2)))
     }
     
 }

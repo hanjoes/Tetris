@@ -35,6 +35,8 @@ struct GameConstants {
     static let YellowBlockAtlasName = "YellowBlocks"
     static let PinkBlockAtlasName = "PinkBlocks"
     
+    static let ArenaMaskImageName = "arena_mask"
+    
     /// Rules
     static let CurrentScoreKey = "CurrentScore"
     static let ProceedToNextLevelFact = "ProceedToNextLevel"

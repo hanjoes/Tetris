@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACE1F53891E00EE73C0 /* Assets.xcassets */; };
 		DB15A6D71F78CB1F008737DD /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D61F78CB1F008737DD /* Tetris.swift */; };
+		DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D81F7CB190008737DD /* CroppingComponent.swift */; };
 		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
 		DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */; };
 		DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetris_start_music.mp3; sourceTree = "<group>"; };
 		DB15A6D61F78CB1F008737DD /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
+		DB15A6D81F7CB190008737DD /* CroppingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingComponent.swift; sourceTree = "<group>"; };
 		DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSpriteNode.swift; sourceTree = "<group>"; };
 		DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoEntity.swift; sourceTree = "<group>"; };
 		DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSpriteComponent.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */,
 				DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */,
 				DB34BC001F6F687B00995392 /* RuleComponent.swift */,
+				DB15A6D81F7CB190008737DD /* CroppingComponent.swift */,
 			);
 			path = GameComponents;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,
 				DB5C77C11F5E67C500A05E04 /* LabelComponent.swift in Sources */,
 				DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */,
+				DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */,
 				DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */,
 				DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */,
 				DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */,
