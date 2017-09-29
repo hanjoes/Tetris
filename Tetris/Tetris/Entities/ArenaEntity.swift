@@ -40,19 +40,18 @@ class ArenaEntity: TetrisEntity {
     
     func clearIfFull() {
         let fullRowNum = Int(arenaComponent.sprite.frame.width / scale)
-        var rowsCleared = 0
+        var clearedRows = [Int]()
         for rowIndex in 0..<nodesBuckets.count {
-            let row = nodesBuckets[rowIndex]
-            if row.count == fullRowNum {
-                _ = row.map { $0.removeFromParent() }
-                nodesBuckets[rowIndex].removeAll()
-                rowsCleared += 1
+            if nodesBuckets[rowIndex].count == fullRowNum {
+                clearedRows.append(rowIndex)
             }
         }
-        compressRows()
+        
+        let rowsCleared = clearedRows.count
         entityManager.scoreLabel.score += rowsCleared
         
         if rowsCleared > 0 {
+            clear(rows: clearedRows)
             ruleComponent.ruleSystem.state[GameConstants.CurrentScoreKey] = entityManager.scoreLabel.score
 
             ruleComponent.ruleSystem.reset()
@@ -63,7 +62,31 @@ class ArenaEntity: TetrisEntity {
         }
     }
     
-    func compressRows() {
+    func clear(rows: [Int]) {
+        // use a container node so we can group the animation.
+        let containerNode = SKNode()
+        arenaComponent.sprite.addChild(containerNode)
+        for rowIndex in rows {
+            _ = nodesBuckets[rowIndex].map {
+                node in
+                node.removeFromParent()
+                containerNode.addChild(node)
+            }
+            nodesBuckets[rowIndex].removeAll()
+        }
+        
+        
+        let disappear = SKAction.fadeOut(withDuration: 0.1)
+        let appear  = SKAction.fadeIn(withDuration: 0.1)
+        let clearAnimation = SKAction.sequence([disappear, appear, disappear, appear])
+        containerNode.run(clearAnimation) {
+            [unowned self] in
+            containerNode.removeFromParent()
+            self.compress()
+        }
+    }
+    
+    func compress() {
         let numRows = Int(arenaComponent.sprite.frame.height / scale)
         for rowIndex in 0..<numRows {
             var currentRow = rowIndex
