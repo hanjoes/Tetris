@@ -30,10 +30,8 @@ struct GameConstants {
     static let GameStartSceneMusic = "background_music"
     static let GameSceneMusic = "game_music"
     
-    static let BlueBlockAtlasName = "BlueBlocks"
-    static let GreenBlockAtlasName = "GreenBlocks"
-    static let YellowBlockAtlasName = "YellowBlocks"
-    static let PinkBlockAtlasName = "PinkBlocks"
+    static let TetrisCellTextureAtlasName = "TetrisCellTextures"
+    static let TetrisCellTextureBaseName = "tetris_cell_texture_"
     
     static let ArenaMaskImageName = "arena_mask"
     

@@ -3,12 +3,7 @@ import GameplayKit
 
 class SpawnAreaEntity: TetrisEntity {
     
-    var blockTextureAtlas = [
-        SKTextureAtlas(named: GameConstants.BlueBlockAtlasName),
-        SKTextureAtlas(named: GameConstants.GreenBlockAtlasName),
-        SKTextureAtlas(named: GameConstants.YellowBlockAtlasName),
-        SKTextureAtlas(named: GameConstants.PinkBlockAtlasName)
-    ]
+    let tetrisCellTexturesAtlas = SKTextureAtlas(named: GameConstants.TetrisCellTextureAtlasName)
     
     let creator = PolyominoCreator<Tetris>()
     
@@ -30,9 +25,8 @@ class SpawnAreaEntity: TetrisEntity {
         let randomIndex = Int(arc4random() % UInt32(prototypes.count))
         let chosenPrototype = prototypes[randomIndex]
         let currentLevel = entityManager.arena.currentLevel
-        let chosenAtlas = blockTextureAtlas[currentLevel % blockTextureAtlas.count]
-        let chosenTextureName = chosenAtlas.textureNames[randomIndex % chosenAtlas.textureNames.count]
-        let chosenTexture = chosenAtlas.textureNamed(chosenTextureName)
+        let textureIndex = currentLevel % tetrisCellTexturesAtlas.textureNames.count  + 1
+        let chosenTexture = tetrisCellTexturesAtlas.textureNamed("\(GameConstants.TetrisCellTextureBaseName)\(textureIndex)")
         
         let polyominoComponent = PolyominoComponent(withTexture: chosenTexture, withScale: scale, withPrototype: chosenPrototype)
         let rotationComponent = RotationComponent()

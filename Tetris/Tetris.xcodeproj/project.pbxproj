@@ -15,10 +15,6 @@
 		DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */; };
 		DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3111F57D3F700B10C2F /* RotationComponent.swift */; };
 		DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */; };
-		DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */; };
-		DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */; };
-		DB21CAD51F538DA200EE73C0 /* PinkBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */; };
-		DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */; };
 		DB3408E91F3ADDD5000A1F5F /* PolyominoCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */; };
 		DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */; };
 		DB34BC011F6F687B00995392 /* RuleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB34BC001F6F687B00995392 /* RuleComponent.swift */; };
@@ -28,6 +24,7 @@
 		DB4558EC1F3F805C002BD1AA /* CGPointExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */; };
 		DB55B7261F70EA730022C2D2 /* tetris_start_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */; };
 		DB55B7291F723CA20022C2D2 /* game_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB55B7281F723BA20022C2D2 /* game_music.mp3 */; };
+		DB5960B61F801A0E00967FF6 /* TetrisCellTextures.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB5960B51F80184600967FF6 /* TetrisCellTextures.atlas */; };
 		DB5C77BF1F5E674100A05E04 /* ScoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */; };
 		DB5C77C11F5E67C500A05E04 /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */; };
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
@@ -80,10 +77,6 @@
 		DB19C3111F57D3F700B10C2F /* RotationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationComponent.swift; sourceTree = "<group>"; };
 		DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hollow_thud.mp3; sourceTree = "<group>"; };
 		DB21CACE1F53891E00EE73C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GreenBlocks.atlas; sourceTree = "<group>"; };
-		DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PinkBlocks.atlas; sourceTree = "<group>"; };
-		DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = YellowBlocks.atlas; sourceTree = "<group>"; };
-		DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BlueBlocks.atlas; sourceTree = "<group>"; };
 		DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreator.swift; sourceTree = "<group>"; };
 		DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyomino.swift; sourceTree = "<group>"; };
 		DB34BC001F6F687B00995392 /* RuleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleComponent.swift; sourceTree = "<group>"; };
@@ -92,6 +85,7 @@
 		DB3D80741F5DF81000890336 /* ArenaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaComponent.swift; sourceTree = "<group>"; };
 		DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionTests.swift; sourceTree = "<group>"; };
 		DB55B7281F723BA20022C2D2 /* game_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_music.mp3; sourceTree = "<group>"; };
+		DB5960B51F80184600967FF6 /* TetrisCellTextures.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TetrisCellTextures.atlas; sourceTree = "<group>"; };
 		DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEntity.swift; sourceTree = "<group>"; };
 		DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
@@ -205,13 +199,10 @@
 			children = (
 				DB21CAC11F513E3700EE73C0 /* Sounds */,
 				DB21CACE1F53891E00EE73C0 /* Assets.xcassets */,
-				DB21CAD21F538B2600EE73C0 /* BlueBlocks.atlas */,
-				DB21CACF1F538B2600EE73C0 /* GreenBlocks.atlas */,
-				DB21CAD01F538B2600EE73C0 /* PinkBlocks.atlas */,
-				DB21CAD11F538B2600EE73C0 /* YellowBlocks.atlas */,
 				DB6987351F65145000F32069 /* GameStartScene.sks */,
 				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
 				DB69871C1F61086E00F32069 /* GameOverScene.sks */,
+				DB5960B51F80184600967FF6 /* TetrisCellTextures.atlas */,
 				DB8B6C861F397BB600DD4694 /* Actions.sks */,
 				DB8B6C8C1F397BB600DD4694 /* Main.storyboard */,
 				DB8B6C911F397BB600DD4694 /* LaunchScreen.storyboard */,
@@ -396,20 +387,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB21CAD41F538DA200EE73C0 /* GreenBlocks.atlas in Resources */,
 				DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */,
 				DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */,
 				DB6987361F6516BE00F32069 /* GameStartScene.sks in Resources */,
-				DB21CAD51F538DA200EE73C0 /* PinkBlocks.atlas in Resources */,
 				DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */,
 				DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */,
+				DB5960B61F801A0E00967FF6 /* TetrisCellTextures.atlas in Resources */,
 				DB8B6C871F397BB600DD4694 /* Actions.sks in Resources */,
 				DB55B7291F723CA20022C2D2 /* game_music.mp3 in Resources */,
-				DB21CAD61F538DA200EE73C0 /* YellowBlocks.atlas in Resources */,
 				DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */,
 				DB55B7261F70EA730022C2D2 /* tetris_start_music.mp3 in Resources */,
 				DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */,
-				DB21CAD31F538DA200EE73C0 /* BlueBlocks.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
