@@ -6,4 +6,6 @@ The project is open source, and is not meant to be put on App Store, so far as I
 
 The motivation of this project is mainly to get my feet wet with SpriteKit and GameplayKit.
 
+# Game Screenshot
+
 <img src="screenshot.png" width="300">

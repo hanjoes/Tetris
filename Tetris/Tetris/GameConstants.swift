@@ -9,19 +9,24 @@ struct GameConstants {
     static let HorizontalMovingInterval = 0.2
     static let HurriedUpDropInterval = 0.05
     
+    // MARK: - Sprites
     static let SpawnAreaKey = "SpawnArea"
     static let TetrisArenaKey = "TetrisArena"
+    static let ScoreLabelKey = "ScoreLabel"
+    static let GameScene = "GameScene"
+    static let GameOverScene = "GameOverScene"
+    static let GameStartScene = "GameStartScene"
+    static let EndgameScoreLabelKey = "EndgameScoreLabel"
+    static let PauseAreaKey = "PauseArea"
+    
+    // MARK: - Buttons
     static let LeftButtonKey = "LeftButton"
     static let RightButtonKey = "RightButton"
     static let GameStartButtonKey = "GameStartButton"
     static let RestartButton = "RestartButton"
     static let DownButtonKey = "DownButton"
     static let RotateButtonKey = "RotateButton"
-    static let ScoreLabelKey = "ScoreLabel"
-    static let GameScene = "GameScene"
-    static let GameOverScene = "GameOverScene"
-    static let GameStartScene = "GameStartScene"
-    static let EndgameScoreLabelKey = "EndgameScoreLabel"
+    static let PauseButtonKey = "PauseButton"
     
     /// Interval for a piece to drop by one cell in second.
     static let DefaultComplexity = 4

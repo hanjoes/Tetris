@@ -5,10 +5,20 @@ class GameScene: SKScene {
     
     let entityManager = EntityManager()
     
+    lazy var stateMachine: GKStateMachine = {
+        let playState = PlayState(withGame: self)
+        let pauseState = PauseState(withGame: self)
+        return GKStateMachine(states: [playState, pauseState])
+    }()
+    
     var hitSound = SKAction.playSoundFileNamed(GameConstants.HitSoundFileName, waitForCompletion: false)
     
     var audioNode: SKAudioNode {
         return childNode(withName: GameConstants.GameStartSceneMusic) as! SKAudioNode
+    }
+    
+    var pauseNode: SKSpriteNode {
+        return childNode(withName: GameConstants.PauseAreaKey) as! SKSpriteNode
     }
     
     var lastUpdateTime: TimeInterval = 0
@@ -19,7 +29,7 @@ extension GameScene {
     override func update(_ currentTime: TimeInterval) {
         let deltaTime = currentTime - lastUpdateTime
         lastUpdateTime = currentTime
-        entityManager.update(deltaTime: deltaTime)
+        stateMachine.update(deltaTime: deltaTime)
     }
     
     override func didMove(to view: SKView) {
@@ -31,6 +41,19 @@ extension GameScene {
         entityManager.spawnArea.spawnPolyominoEntity(withDelegate: self)
         entityManager.spawnArea.stagePolyomino()
         entityManager.spawnArea.spawnPolyominoEntity(withDelegate: self)
+        
+        stateMachine.enter(PauseState.self)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard stateMachine.currentState is PauseState else {
+            return
+        }
+        for touch in touches {
+            if pauseNode.frame.contains(touch.location(in: self)) {
+                stateMachine.enter(PlayState.self)
+            }
+        }
     }
 }
 
@@ -64,7 +87,6 @@ private extension GameScene {
     func playBackgroundMusic() {
         audioNode.run(SKAction.play())
     }
-    
     
     func initializeSpawnArea() {
         guard let spawnAreaSprite = childNode(withName: GameConstants.SpawnAreaKey) as? SKSpriteNode else {
@@ -114,6 +136,7 @@ private extension GameScene {
         initializeRightButton()
         initializeDownButton()
         initializeRotateButton()
+        initializePauseButton()
     }
 
 }
@@ -122,27 +145,34 @@ private extension GameScene {
 private extension GameScene {
     
     var leftButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.LeftButtonKey)! as! ButtonSpriteNode
+        return childNode(withName: GameConstants.LeftButtonKey) as! ButtonSpriteNode
     }
     
     var rightButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.RightButtonKey)! as! ButtonSpriteNode
+        return childNode(withName: GameConstants.RightButtonKey) as! ButtonSpriteNode
     }
     
     var downButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.DownButtonKey)! as! ButtonSpriteNode
+        return childNode(withName: GameConstants.DownButtonKey) as! ButtonSpriteNode
     }
     
     var rotateButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.RotateButtonKey)! as! ButtonSpriteNode
+        return childNode(withName: GameConstants.RotateButtonKey) as! ButtonSpriteNode
+    }
+    
+    var pauseButton: ButtonSpriteNode {
+        return childNode(withName: GameConstants.PauseButtonKey) as! ButtonSpriteNode
     }
     
     func initializeLeftButton() {
         leftButton.isUserInteractionEnabled = true
 
-        
         leftButton.touchDownHandler = {
             [unowned self] in
+            
+            guard self.stateMachine.currentState is PlayState else {
+                return
+            }
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
@@ -172,6 +202,10 @@ private extension GameScene {
         rightButton.touchDownHandler = {
             [unowned self] in
             
+            guard self.stateMachine.currentState is PlayState else {
+                return
+            }
+            
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
                 return
@@ -189,7 +223,11 @@ private extension GameScene {
                 return
             }
             
-            moveComponent.direction = self.leftButton.buttonDown ? .left : .none
+            switch self.stateMachine.currentState {
+            case is PlayState:
+                moveComponent.direction = self.leftButton.buttonDown ? .left : .none
+            default: break
+            }
         }
     }
     
@@ -236,6 +274,14 @@ private extension GameScene {
             if collider.canTurnClockwise() {
                 rotationComponent.turnClockwise()
             }
+        }
+    }
+    
+    func initializePauseButton() {
+        pauseButton.isUserInteractionEnabled = true
+        pauseButton.touchDownHandler = {
+            [unowned self] in
+            self.stateMachine.enter(PauseState.self)
         }
     }
 }

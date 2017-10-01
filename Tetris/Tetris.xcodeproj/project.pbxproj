@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB21CACE1F53891E00EE73C0 /* Assets.xcassets */; };
 		DB15A6D71F78CB1F008737DD /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D61F78CB1F008737DD /* Tetris.swift */; };
 		DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D81F7CB190008737DD /* CroppingComponent.swift */; };
 		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
@@ -25,6 +24,9 @@
 		DB55B7261F70EA730022C2D2 /* tetris_start_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */; };
 		DB55B7291F723CA20022C2D2 /* game_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB55B7281F723BA20022C2D2 /* game_music.mp3 */; };
 		DB5960B61F801A0E00967FF6 /* TetrisCellTextures.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB5960B51F80184600967FF6 /* TetrisCellTextures.atlas */; };
+		DB5960B91F807C5100967FF6 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5960B81F807C5100967FF6 /* PlayState.swift */; };
+		DB5960BB1F807C5C00967FF6 /* PauseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5960BA1F807C5C00967FF6 /* PauseState.swift */; };
+		DB5960BD1F807FC200967FF6 /* TetrisState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5960BC1F807FC200967FF6 /* TetrisState.swift */; };
 		DB5C77BF1F5E674100A05E04 /* ScoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */; };
 		DB5C77C11F5E67C500A05E04 /* LabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */; };
 		DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */; };
@@ -33,6 +35,7 @@
 		DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6987311F63BF6900F32069 /* GameOverScene.swift */; };
 		DB6987361F6516BE00F32069 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB6987351F65145000F32069 /* GameStartScene.sks */; };
 		DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */; };
+		DB6D32781F80BDCE00DA828C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6D32771F80BC6300DA828C /* Assets.xcassets */; };
 		DB88A64A1F5E17D40059D5BC /* SpawnAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */; };
 		DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */; };
 		DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8B6C821F397BB600DD4694 /* AppDelegate.swift */; };
@@ -76,7 +79,6 @@
 		DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSpriteComponent.swift; sourceTree = "<group>"; };
 		DB19C3111F57D3F700B10C2F /* RotationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationComponent.swift; sourceTree = "<group>"; };
 		DB21CAC61F51403A00EE73C0 /* hollow_thud.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hollow_thud.mp3; sourceTree = "<group>"; };
-		DB21CACE1F53891E00EE73C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB3408E81F3ADDD5000A1F5F /* PolyominoCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoCreator.swift; sourceTree = "<group>"; };
 		DB3408EA1F3ADDEE000A1F5F /* Polyomino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyomino.swift; sourceTree = "<group>"; };
 		DB34BC001F6F687B00995392 /* RuleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleComponent.swift; sourceTree = "<group>"; };
@@ -86,6 +88,9 @@
 		DB4558EB1F3F805C002BD1AA /* CGPointExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensionTests.swift; sourceTree = "<group>"; };
 		DB55B7281F723BA20022C2D2 /* game_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_music.mp3; sourceTree = "<group>"; };
 		DB5960B51F80184600967FF6 /* TetrisCellTextures.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TetrisCellTextures.atlas; sourceTree = "<group>"; };
+		DB5960B81F807C5100967FF6 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
+		DB5960BA1F807C5C00967FF6 /* PauseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseState.swift; sourceTree = "<group>"; };
+		DB5960BC1F807FC200967FF6 /* TetrisState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisState.swift; sourceTree = "<group>"; };
 		DB5C77BE1F5E674100A05E04 /* ScoreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEntity.swift; sourceTree = "<group>"; };
 		DB5C77C01F5E67C500A05E04 /* LabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelComponent.swift; sourceTree = "<group>"; };
 		DB653B2E1F3EC131004AA01E /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 		DB6987311F63BF6900F32069 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		DB6987351F65145000F32069 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		DB6CB59B1F5D1471009D6B8F /* CollisionCheckingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionCheckingComponent.swift; sourceTree = "<group>"; };
+		DB6D32771F80BC6300DA828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB88A6491F5E17D40059D5BC /* SpawnAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaEntity.swift; sourceTree = "<group>"; };
 		DB88A64B1F5E18F20059D5BC /* SpawnAreaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnAreaComponent.swift; sourceTree = "<group>"; };
 		DB8B6C7F1F397BB600DD4694 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +189,16 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		DB5960B71F807C3100967FF6 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				DB5960B81F807C5100967FF6 /* PlayState.swift */,
+				DB5960BA1F807C5C00967FF6 /* PauseState.swift */,
+				DB5960BC1F807FC200967FF6 /* TetrisState.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
 		DB653B371F48B14D004AA01E /* Polyomino */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,8 +213,8 @@
 		DB653B381F48B16B004AA01E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB6D32771F80BC6300DA828C /* Assets.xcassets */,
 				DB21CAC11F513E3700EE73C0 /* Sounds */,
-				DB21CACE1F53891E00EE73C0 /* Assets.xcassets */,
 				DB6987351F65145000F32069 /* GameStartScene.sks */,
 				DB8B6C841F397BB600DD4694 /* GameScene.sks */,
 				DB69871C1F61086E00F32069 /* GameOverScene.sks */,
@@ -252,6 +268,7 @@
 		DB8B6C811F397BB600DD4694 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				DB5960B71F807C3100967FF6 /* States */,
 				DB653B381F48B16B004AA01E /* Supporting Files */,
 				DB19C3051F5533B300B10C2F /* UIComponents */,
 				DB19C3081F57D09E00B10C2F /* Entities */,
@@ -389,6 +406,7 @@
 			files = (
 				DB21CAC71F51403C00EE73C0 /* hollow_thud.mp3 in Resources */,
 				DB8B6C8E1F397BB600DD4694 /* Main.storyboard in Resources */,
+				DB6D32781F80BDCE00DA828C /* Assets.xcassets in Resources */,
 				DB6987361F6516BE00F32069 /* GameStartScene.sks in Resources */,
 				DB8B6C851F397BB600DD4694 /* GameScene.sks in Resources */,
 				DB8B6C931F397BB600DD4694 /* LaunchScreen.storyboard in Resources */,
@@ -397,7 +415,6 @@
 				DB55B7291F723CA20022C2D2 /* game_music.mp3 in Resources */,
 				DB69871D1F61086E00F32069 /* GameOverScene.sks in Resources */,
 				DB55B7261F70EA730022C2D2 /* tetris_start_music.mp3 in Resources */,
-				DB04A9FA1F70E4A8007A03F3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +448,7 @@
 				DB34BC011F6F687B00995392 /* RuleComponent.swift in Sources */,
 				DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */,
 				DB3D806F1F5DF6D300890336 /* ArenaEntity.swift in Sources */,
+				DB5960B91F807C5100967FF6 /* PlayState.swift in Sources */,
 				DB8B6C8B1F397BB600DD4694 /* GameViewController.swift in Sources */,
 				DB3408EB1F3ADDEE000A1F5F /* Polyomino.swift in Sources */,
 				DBC8533F1F5CEEE100E02103 /* EntityManager.swift in Sources */,
@@ -444,9 +462,11 @@
 				DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */,
 				DBAD49101F57DAF000009DDA /* FixedMoveComponent.swift in Sources */,
 				DBC8533D1F5CCEF500E02103 /* PolyominoComponent.swift in Sources */,
+				DB5960BD1F807FC200967FF6 /* TetrisState.swift in Sources */,
 				DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */,
 				DB6CB59C1F5D1471009D6B8F /* CollisionCheckingComponent.swift in Sources */,
 				DB8B6C831F397BB600DD4694 /* AppDelegate.swift in Sources */,
+				DB5960BB1F807C5C00967FF6 /* PauseState.swift in Sources */,
 				DB5C77BF1F5E674100A05E04 /* ScoreEntity.swift in Sources */,
 				DB653B311F4118BC004AA01E /* GameConstants.swift in Sources */,
 				DB3408E91F3ADDD5000A1F5F /* PolyominoCreator.swift in Sources */,
