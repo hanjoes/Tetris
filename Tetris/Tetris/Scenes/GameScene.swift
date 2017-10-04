@@ -1,5 +1,6 @@
 import SpriteKit
 import GameplayKit
+import SKSpriteButton
 
 class GameScene: SKScene {
     
@@ -144,31 +145,30 @@ private extension GameScene {
 // MARK: - Buttons
 private extension GameScene {
     
-    var leftButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.LeftButtonKey) as! ButtonSpriteNode
+    var leftButton: SKSpriteButton {
+        return childNode(withName: GameConstants.LeftButtonKey) as! SKSpriteButton
     }
     
-    var rightButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.RightButtonKey) as! ButtonSpriteNode
+    var rightButton: SKSpriteButton {
+        return childNode(withName: GameConstants.RightButtonKey) as! SKSpriteButton
     }
     
-    var downButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.DownButtonKey) as! ButtonSpriteNode
+    var downButton: SKSpriteButton {
+        return childNode(withName: GameConstants.DownButtonKey) as! SKSpriteButton
     }
     
-    var rotateButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.RotateButtonKey) as! ButtonSpriteNode
+    var rotateButton: SKSpriteButton {
+        return childNode(withName: GameConstants.RotateButtonKey) as! SKSpriteButton
     }
     
-    var pauseButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.PauseButtonKey) as! ButtonSpriteNode
+    var pauseButton: SKSpriteButton {
+        return childNode(withName: GameConstants.PauseButtonKey) as! SKSpriteButton
     }
     
     func initializeLeftButton() {
-        leftButton.isUserInteractionEnabled = true
-
-        leftButton.touchDownHandler = {
-            [unowned self] in
+        leftButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             
             guard self.stateMachine.currentState is PlayState else {
                 return
@@ -184,23 +184,23 @@ private extension GameScene {
             moveComponent.moveHorizontally()
         }
         
-        leftButton.touchUpHandler = {
-            [unowned self] in
+        leftButton.addTouchesEndedHandler {
+            [unowned self]
+            (_, _) in
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
                 return
             }
             
-            moveComponent.direction = self.rightButton.buttonDown ? .right : .none
+            moveComponent.direction = self.rightButton.status == .tapped ? .right : .none
         }
     }
     
     func initializeRightButton() {
-        rightButton.isUserInteractionEnabled = true
-        
-        rightButton.touchDownHandler = {
-            [unowned self] in
+        rightButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             
             guard self.stateMachine.currentState is PlayState else {
                 return
@@ -215,8 +215,9 @@ private extension GameScene {
             moveComponent.waitForMoveTime = 0.0
             moveComponent.moveHorizontally()
         }
-        rightButton.touchUpHandler = {
-            [unowned self] in
+        rightButton.addTouchesEndedHandler {
+            [unowned self]
+            (_, _) in
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
@@ -225,18 +226,16 @@ private extension GameScene {
             
             switch self.stateMachine.currentState {
             case is PlayState:
-                moveComponent.direction = self.leftButton.buttonDown ? .left : .none
+                moveComponent.direction = self.leftButton.status == .tapped ? .left : .none
             default: break
             }
         }
     }
     
     func initializeDownButton() {
-        downButton.isUserInteractionEnabled = true
-
-        
-        downButton.touchDownHandler = {
-            [unowned self] in
+        downButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
@@ -245,8 +244,10 @@ private extension GameScene {
             
             moveComponent.currentDropInterval = GameConstants.HurriedUpDropInterval
         }
-        downButton.touchUpHandler = {
-            [unowned self] in
+        
+        downButton.addTouchesEndedHandler {
+            [unowned self]
+            (_, _) in
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let moveComponent = droppingPolyomino?.component(ofType: FixedMoveComponent.self) else {
@@ -258,9 +259,9 @@ private extension GameScene {
     }
     
     func initializeRotateButton() {
-        rotateButton.isUserInteractionEnabled = true
-        rotateButton.touchDownHandler = {
-            [unowned self] in
+        rotateButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             
             let droppingPolyomino = self.entityManager.arena.droppingPolyomino
             guard let rotationComponent = droppingPolyomino?.component(ofType: RotationComponent.self) else {
@@ -278,9 +279,9 @@ private extension GameScene {
     }
     
     func initializePauseButton() {
-        pauseButton.isUserInteractionEnabled = true
-        pauseButton.touchDownHandler = {
-            [unowned self] in
+        pauseButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             self.stateMachine.enter(PauseState.self)
         }
     }

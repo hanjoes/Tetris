@@ -1,6 +1,6 @@
 {
   "name": "SKSpriteButton",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "summary": "Button implemented using SpriteKit.",
   "description": "This framework implements the Button widget which is very common but\nmissing from SpriteKit.",
   "homepage": "https://github.com/hanjoes/SKSpriteButton",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/hanjoes/SKSpriteButton.git",
-    "tag": "0.1.0"
+    "tag": "0.3.0"
   },
   "platforms": {
     "ios": "8.0"

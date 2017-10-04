@@ -1,12 +1,17 @@
 import SpriteKit
 
-// MARK: Main definition
+// MARK: SKSpriteButton
 
 /// (SeriousKit) SKSpriteButton.
 /// This is a special kind of `SKSpriteNode` that behaves like a button.
 ///
 /// User should expect similar ergonomics when using `UIButton`.
 public class SKSpriteButton: SKSpriteNode {
+    
+    public enum Status {
+        case normal
+        case tapped
+    }
     
     public typealias EventHandler = (Set<UITouch>, UIEvent?) -> Void
 
@@ -16,6 +21,16 @@ public class SKSpriteButton: SKSpriteNode {
     
     /// Color to display when a button is tapped.
     public var tappedColor: UIColor?
+    
+    /// Button status represented by `SKSpriteButton.Status`.
+    public var status: Status = .normal {
+        didSet {
+            switch status {
+            case .normal: showNormalAppearance()
+            case .tapped: showTappedAppearance()
+            }
+        }
+    }
     
     internal var storedNormalColor: UIColor?
     
@@ -34,12 +49,12 @@ public class SKSpriteButton: SKSpriteNode {
         touchesBeganHandlers.append(handler)
     }
     
-    public func addTouchesEndedHandlers(handler: @escaping EventHandler) {
+    public func addTouchesEndedHandler(handler: @escaping EventHandler) {
         isUserInteractionEnabled = true
         touchesEndedHandlers.append(handler)
     }
     
-    public func addTouchesCancelledHandlers(handler: @escaping EventHandler) {
+    public func addTouchesCancelledHandler(handler: @escaping EventHandler) {
         isUserInteractionEnabled = true
         touchesCancelledHandlers.append(handler)
     }
@@ -48,7 +63,7 @@ public class SKSpriteButton: SKSpriteNode {
 // MARK: - Touch events.
 extension SKSpriteButton {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        showTappedAppearance()
+        status = .tapped
         touchesBeganHandlers.forEach {
             handler in
             handler(touches, event)
@@ -56,7 +71,7 @@ extension SKSpriteButton {
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        showNormalAppearance()
+        status = .normal
         touchesEndedHandlers.forEach {
             handler in
             handler(touches, event)
@@ -64,7 +79,7 @@ extension SKSpriteButton {
     }
     
     public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        showNormalAppearance()
+        status = .normal
         touchesCancelledHandlers.forEach {
             handler in
             handler(touches, event)
@@ -72,6 +87,7 @@ extension SKSpriteButton {
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        status = .tapped
         touchesMovedHandlers.forEach {
             handler in
             handler(touches, event)

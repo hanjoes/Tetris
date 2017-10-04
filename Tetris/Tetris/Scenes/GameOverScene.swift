@@ -1,4 +1,5 @@
 import SpriteKit
+import SKSpriteButton
 
 class GameOverScene: SKScene {
     var score = 0
@@ -17,15 +18,14 @@ extension GameOverScene {
 // MARK: - Buttons
 extension GameOverScene {
     
-    var restartButton: ButtonSpriteNode {
-        return childNode(withName: GameConstants.RestartButton)! as! ButtonSpriteNode
+    var restartButton: SKSpriteButton {
+        return childNode(withName: GameConstants.RestartButton)! as! SKSpriteButton
     }
     
     func initializeRestartButton() {
-        restartButton.isUserInteractionEnabled = true
-        
-        restartButton.touchUpHandler = {
-            [unowned self] in
+        restartButton.addTouchesBeganHandler {
+            [unowned self]
+            (_, _) in
             let gameScene = SKScene(fileNamed: GameConstants.GameScene)!
             gameScene.scaleMode = .aspectFit
             let transition = SKTransition.doorway(withDuration: 0.5)

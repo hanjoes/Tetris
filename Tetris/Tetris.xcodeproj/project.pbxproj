@@ -12,7 +12,6 @@
 		CEB91EF20A453144DC548D1E /* Pods_Tetris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5128D1C115A93B73F34F9D83 /* Pods_Tetris.framework */; };
 		DB15A6D71F78CB1F008737DD /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D61F78CB1F008737DD /* Tetris.swift */; };
 		DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15A6D81F7CB190008737DD /* CroppingComponent.swift */; };
-		DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */; };
 		DB19C30A1F57D0B600B10C2F /* PolyominoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */; };
 		DB19C30C1F57D2CA00B10C2F /* CompositeSpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */; };
 		DB19C3121F57D3F700B10C2F /* RotationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB19C3111F57D3F700B10C2F /* RotationComponent.swift */; };
@@ -86,7 +85,6 @@
 		DB04A9FD1F70E925007A03F3 /* tetris_start_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetris_start_music.mp3; sourceTree = "<group>"; };
 		DB15A6D61F78CB1F008737DD /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
 		DB15A6D81F7CB190008737DD /* CroppingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingComponent.swift; sourceTree = "<group>"; };
-		DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSpriteNode.swift; sourceTree = "<group>"; };
 		DB19C3091F57D0B600B10C2F /* PolyominoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyominoEntity.swift; sourceTree = "<group>"; };
 		DB19C30B1F57D2CA00B10C2F /* CompositeSpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSpriteComponent.swift; sourceTree = "<group>"; };
 		DB19C3111F57D3F700B10C2F /* RotationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationComponent.swift; sourceTree = "<group>"; };
@@ -181,14 +179,6 @@
 				DBE3163C1F68F2A500284AF8 /* GameStartScene.swift */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		DB19C3051F5533B300B10C2F /* UIComponents */ = {
-			isa = PBXGroup;
-			children = (
-				DB19C3061F5533EF00B10C2F /* ButtonSpriteNode.swift */,
-			);
-			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		DB19C3081F57D09E00B10C2F /* Entities */ = {
@@ -297,7 +287,6 @@
 			children = (
 				DB5960B71F807C3100967FF6 /* States */,
 				DB653B381F48B16B004AA01E /* Supporting Files */,
-				DB19C3051F5533B300B10C2F /* UIComponents */,
 				DB19C3081F57D09E00B10C2F /* Entities */,
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
@@ -655,7 +644,6 @@
 				DB6987321F63BF6900F32069 /* GameOverScene.swift in Sources */,
 				DB3D80751F5DF81000890336 /* ArenaComponent.swift in Sources */,
 				DB653B2F1F3EC131004AA01E /* CGPointExtensions.swift in Sources */,
-				DB19C3071F5533EF00B10C2F /* ButtonSpriteNode.swift in Sources */,
 				DB5C77C11F5E67C500A05E04 /* LabelComponent.swift in Sources */,
 				DB88A64C1F5E18F20059D5BC /* SpawnAreaComponent.swift in Sources */,
 				DB15A6D91F7CB190008737DD /* CroppingComponent.swift in Sources */,
