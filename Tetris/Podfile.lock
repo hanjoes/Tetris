@@ -1,5 +1,5 @@
 PODS:
-  - SKSpriteButton (0.3.0)
+  - SKSpriteButton (0.4.0)
 
 DEPENDENCIES:
   - SKSpriteButton (from `https://github.com/hanjoes/SKSpriteButton.git`)
@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SKSpriteButton:
-    :commit: ab24f2a479bbfa411bc992b9b2d83ada9ca9faee
+    :commit: 9091b3505e0e4a4233183472c20d14004ca0925b
     :git: https://github.com/hanjoes/SKSpriteButton.git
 
 SPEC CHECKSUMS:
-  SKSpriteButton: ba46523142f0f4eb1d2cab8c05e9a5f7f75f0e11
+  SKSpriteButton: ce3496c20d53a0f1dc94e655a133011617beaff3
 
 PODFILE CHECKSUM: 0dd6d1598f83f33dfd878ceca8273c477d3d1af4
 

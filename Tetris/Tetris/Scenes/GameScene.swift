@@ -183,8 +183,8 @@ private extension GameScene {
             moveComponent.waitForMoveTime = 0.0
             moveComponent.moveHorizontally()
         }
-        
-        leftButton.addTouchesEndedHandler {
+
+        leftButton.addTouchesUpHandler {
             [unowned self]
             (_, _) in
             
@@ -215,7 +215,7 @@ private extension GameScene {
             moveComponent.waitForMoveTime = 0.0
             moveComponent.moveHorizontally()
         }
-        rightButton.addTouchesEndedHandler {
+        rightButton.addTouchesUpHandler {
             [unowned self]
             (_, _) in
             
@@ -245,7 +245,7 @@ private extension GameScene {
             moveComponent.currentDropInterval = GameConstants.HurriedUpDropInterval
         }
         
-        downButton.addTouchesEndedHandler {
+        downButton.addTouchesUpHandler {
             [unowned self]
             (_, _) in
             
