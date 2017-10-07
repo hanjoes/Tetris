@@ -593,9 +593,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TetrisTests/Pods-TetrisTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -854,7 +857,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2014F57840F75D5DEAA8E5F1 /* Pods-TetrisTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 687GE6J6LA;
 				INFOPLIST_FILE = TetrisTests/Info.plist;
@@ -871,7 +874,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C41C5BC2C01BBE8474A9B542 /* Pods-TetrisTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 687GE6J6LA;
 				INFOPLIST_FILE = TetrisTests/Info.plist;
