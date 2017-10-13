@@ -38,6 +38,8 @@ struct GameConstants {
     static let TetrisCellTextureAtlasName = "TetrisCellTextures"
     static let TetrisCellTextureBaseName = "tetris_cell_texture_"
     
+    static let GameStartButtonTappedTextureName = "triangle_tapped"
+    
     static let ArenaMaskImageName = "arena_mask"
     
     /// Rules
