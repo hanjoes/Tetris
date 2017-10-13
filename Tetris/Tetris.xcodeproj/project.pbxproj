@@ -285,8 +285,8 @@
 		DB8B6C811F397BB600DD4694 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
-				DB5960B71F807C3100967FF6 /* States */,
 				DB653B381F48B16B004AA01E /* Supporting Files */,
+				DB5960B71F807C3100967FF6 /* States */,
 				DB19C3081F57D09E00B10C2F /* Entities */,
 				DB653B3B1F48B30A004AA01E /* GameComponents */,
 				DB653B371F48B14D004AA01E /* Polyomino */,
